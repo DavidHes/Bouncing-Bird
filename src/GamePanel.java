@@ -9,8 +9,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 //import javax.swing.JPanel;
@@ -23,11 +21,11 @@ public class GamePanel extends MenuFundament{
     int birdxPOS = 100;
     int birdyPOS = 300;
     int inc = 70;
-    int drop = 5;
-    int gameoverdrop = 7;
+   private int drop = 5;
+   private int gameoverdrop = 7;
 
-    Font myFont1 = new Font("Serif", Font.BOLD, 22);
-    Font myFont = new Font("Serif", Font.BOLD, 52);
+    private Font myFont1 = new Font("Serif", Font.BOLD, 22);
+   private Font myFont = new Font("Serif", Font.BOLD, 52);
 
     JButton startBut;
     JButton restartBut;
