@@ -1,13 +1,8 @@
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,61 +11,49 @@ import javax.swing.Timer;
 
 //import GUI.MyPanel.MoveListener;
 //import GUI.MyPanel.MyMouseListener;
-public class GamePanel extends MenuFundament{
+public class GamePanel extends MenuFundament {
     int score = 0;
     int birdxPOS = 100;
     int birdyPOS = 300;
-    int inc = 70;
+    int jumpheight = 70;
    private int drop = 5;
    private int gameoverdrop = 7;
-
     private Font myFont1 = new Font("Serif", Font.BOLD, 22);
    private Font myFont = new Font("Serif", Font.BOLD, 52);
 
-    JButton startBut;
+
     JButton restartBut;
+    JButton addscore;
 
-    boolean visible = true;
+    boolean spielmenuvisible = false;
     boolean gameover = true;
-
     String gameovertext = "Game Over";
-    String start = "Click to Start!";
-    String St = "";
-
+    String clickToStartText = "Click to Start!";
+    String clearClickToStartText = "";
+    Timer dropTimer = new Timer(20, new MoveListener());
+    Timer  gameOverDropTimer = new Timer(10, new GameoverListener());
     Image tubeDown = new ImageIcon("/Users/uni/Desktop/tubeDown.png").getImage();
     Image tubeup = new ImageIcon("/Users/uni/Desktop/tube.png").getImage();
 
-    Timer time;
-    Timer myTimer = new Timer(10, new GameoverListener());
-
     public GamePanel() {
-
-        time = new Timer(20, new MoveListener());
-
-
-        butscore.setBounds(144, 350, 150, 50);
-        but4.setBounds(144, 450, 150, 50);
-        but5.setBounds(144, 550, 150, 50);
-
-        startBut = new JButton("Start");
-        startBut.setBounds(144, 250, 150, 50);
 
         restartBut = new JButton("Play Again");
         restartBut.setBounds(144, 250, 150, 50);
 
+        addscore= new JButton("Add Score");
+        addscore.setBounds(144, 350, 150, 50);
 
-        startBut.addActionListener(new startgameListener());
+        backToMenuBut.setBounds(144, 450, 150, 50);
 
-        if (visible == true) {
-            but4.setBounds(144, 350, 150, 50);
-            but5.setBounds(144, 450, 150, 50);
 
-            this.add(startBut);
-            this.add(but4);
-            this.add(but5);
+        if (spielmenuvisible == true) {
+
+            this.add(restartBut);
+            this.add(addscore;
+            this.add(backToMenuBut);
         }
 
-        this.addMouseListener(new MyMouseListener()); //new MyMouseListener() --> anaoynme innere Klasse, weil sie keinen Namen hat.
+       // this.addMouseListener(new MyMouseListener()); //new MyMouseListener() --> anaoynme innere Klasse, weil sie keinen Namen hat.
 
         //mouseadapter basis für mouselistener und mousemotionlistener, das spart einem Code, denn damit müsste man nur die methode
         //überschrieben, welche man braucht, Bsp. mousepressed, mouseentered, ..... --> dann kann man mit mouseadapter auch nur
@@ -87,14 +70,12 @@ public class GamePanel extends MenuFundament{
         g.setColor(Color.BLACK);
         g.setFont(myFont);
         g.drawString("" + score, 205, 100);
-
-
         g.drawImage(grünbird, birdxPOS, birdyPOS, 70, 50, this);
 
-        if(visible == false) {
+        if(spielmenuvisible == false) {
             g.setColor(Color.BLACK);
             g.setFont(myFont1);
-            g.drawString(start, 150, 400);
+            g.drawString(clickToStartText, 150, 400);
 
             g.drawImage(tubeDown, 400, 0, 70, 300, this);
             g.drawImage(tubeup, 400, 418, 70, 350, this);
@@ -115,81 +96,31 @@ public class GamePanel extends MenuFundament{
                 time.stop();
                 birdyPOS = 720;
                 this.add(restartBut);
-                this.add(butscore);
-                this.add(but4);
-                this.add(but5);
+                this.add(backToMenuBut);
+                this.add(addscore);
             }
 
         }
         repaint();
     }
 
-    public class startgameListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-            if(e.getSource() == startBut) {
-                gameover = false;
-                visible = false;
-            }
-
-            if (visible == false) {
-
-                remove(startBut);
-                remove(but5);
-                remove(but4);
-                remove(butscore);
-                repaint();
-            }
-
-            if(e.getSource() == but5) {
-
-            }
-        }
+    public void addController(GameController game) {
+        this.gameController = game;
+        restartBut.addActionListener((ActionListener) gameController);
+        backToMenuBut.addActionListener((ActionListener) gameController);
+        addscore.addActionListener((ActionListener) gameController);
     }
+    public void spawnTube() {
 
-    public class MyMouseListener implements MouseListener {
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-
-        }
-        @Override
-        public void mousePressed(MouseEvent e) {
-            if(gameover == false) {
-                start = St;
-                birdyPOS = birdyPOS - inc;
-                time.stop();
-            }
-        }
-        @Override
-        public void mouseReleased(MouseEvent e) {
-            if(gameover == false) {
-                time.start();
-            }
-        }
-        @Override
-        public void mouseEntered(MouseEvent e) {
-        }
-        @Override
-        public void mouseExited(MouseEvent e) {
-        }
     }
+    public void getNextTubeCord (){
 
-    public class MoveListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            birdyPOS = birdyPOS + drop;
-        }
     }
+    public void checkBorderCollusion (int birdYPOS, int birdXPOS) {
 
-    public class GameoverListener implements ActionListener {
+    }
+    public void checkTubeCollusion (int birdYPOS, int birdXPOS) {
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            birdyPOS = birdyPOS + gameoverdrop;
-        }
     }
 
 }

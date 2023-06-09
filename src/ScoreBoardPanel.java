@@ -1,15 +1,11 @@
 import java.awt.event.ActionListener;
 
-public class RateGamePanel extends MenuFundament{
+public class ScoreBoardPanel extends MenuFundament {
     MenuController menuController;
 
-    public RateGamePanel(){
+    public ScoreBoardPanel() {
 
         menuController = new MenuController();
-
-        this.add(backToMenuBut);
-
     }
-
 
 }

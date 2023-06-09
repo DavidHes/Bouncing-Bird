@@ -1,16 +1,22 @@
 
 import java.awt.Graphics;
+import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 public class MenuPanel extends MenuFundament{
-
+    MenuController menuController;
 	public MenuPanel() {
 
-            add(but1);
-            add(but2);
-            add(but3);
-            add(but4);
+        menuController = new MenuController();
+
+            add(startGameBut);
+            add(scoreBoardBut);
+            add(rateGameBut);
+            add(settingsBut);
+
+         //   startGameBut.setVisible(false);
         }
+
         @Override
         protected void paintComponent(Graphics g) {
             // TODO Auto-generated method stub
