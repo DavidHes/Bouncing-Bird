@@ -5,6 +5,12 @@ public class SettingsPanel extends MenuFundament{
 
     public SettingsPanel(){
 
+        add(startGameBut);
+        add(startGameBut);
+        add(startGameBut);
+        add(startGameBut);
+
+
         menuController = new MenuController();
 
         this.add(backToMenuBut);

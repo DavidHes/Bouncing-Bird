@@ -30,8 +30,8 @@ public class GamePanel extends MenuFundament {
     String gameovertext = "Game Over";
     String clickToStartText = "Click to Start!";
     String clearClickToStartText = "";
-    Timer dropTimer = new Timer(20, new MoveListener());
-    Timer  gameOverDropTimer = new Timer(10, new GameoverListener());
+   // Timer dropTimer = new Timer(20, new MoveListener());
+   // Timer  gameOverDropTimer = new Timer(10, new GameoverListener());
     Image tubeDown = new ImageIcon("/Users/uni/Desktop/tubeDown.png").getImage();
     Image tubeup = new ImageIcon("/Users/uni/Desktop/tube.png").getImage();
 
@@ -49,7 +49,7 @@ public class GamePanel extends MenuFundament {
         if (spielmenuvisible == true) {
 
             this.add(restartBut);
-            this.add(addscore;
+            this.add(addscore);
             this.add(backToMenuBut);
         }
 
@@ -85,15 +85,15 @@ public class GamePanel extends MenuFundament {
 
         if (birdyPOS >= getHeight() || birdyPOS <= 0) {
             gameover = true;
-            myTimer.start();
+        //    myTimer.start();
 
             if(birdyPOS >= 720) {
                 g.setColor(Color.BLACK);
                 g.setFont(myFont1);
                 g.drawString(gameovertext, 200, 360);
 
-                myTimer.stop();
-                time.stop();
+           //     myTimer.stop();
+           //     time.stop();
                 birdyPOS = 720;
                 this.add(restartBut);
                 this.add(backToMenuBut);

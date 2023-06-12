@@ -9,6 +9,6 @@ public class ScoreboardList extends Observable {
 
    public void addScore(String name, int score){
    }
-    public void addScore renderScoreboard(){
-    }
+   // public void addScore renderScoreboard(){
+  //  }
 }

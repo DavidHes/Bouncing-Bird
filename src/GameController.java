@@ -25,14 +25,14 @@ public class GameController {
     public class startgameListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(e.getSource() == startBut) {
-                gameover = false;
-                visible = false;
-            }
+         //   if(e.getSource() == startBut) {
+            //    gameover = false;
+            //    visible = false;
+          //  }
 
-            if(e.getSource() == but5) {
+        //    if(e.getSource() == but5) {
 
-            }
+         //   }
         }
     }
 
@@ -40,20 +40,20 @@ public class GameController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-        }
-        @Override
-        public void mousePressed(MouseEvent e) {
-            if(gameover == false) {
-                start = St;
-                birdyPOS = birdyPOS - inc;
-                time.stop();
-            }
+       }
+      @Override
+       public void mousePressed(MouseEvent e) {
+        //    if(gameover == false) {
+          //      start = St;
+         //       birdyPOS = birdyPOS - inc;
+           //     time.stop();
+         //  }
         }
         @Override
         public void mouseReleased(MouseEvent e) {
-            if(gameover == false) {
-                time.start();
-            }
+          //  if(gameover == false) {
+              //  time.start();
+           // }
         }
         @Override
         public void mouseEntered(MouseEvent e) {
@@ -68,7 +68,7 @@ public class GameController {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            birdyPOS = birdyPOS + drop;
+          //  birdyPOS = birdyPOS + drop;
         }
     }
 
@@ -76,7 +76,8 @@ public class GameController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            birdyPOS = birdyPOS + gameoverdrop;
+
+            //birdyPOS = birdyPOS + gameoverdrop;
         }
     }
 }

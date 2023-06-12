@@ -13,8 +13,9 @@ import javax.swing.JPanel;
 public class MenuFundament extends JPanel implements Observer {
     JButton startGameBut, scoreBoardBut, settingsBut , rateGameBut, backToMenuBut;
 
-    MenuController menuController = new MenuController();
-   GameController gameController = new GameController();
+    MenuController menuController;
+
+    GameController gameController = new GameController();
     String titel;
     Image titelBB = new ImageIcon("/Users/uni/Desktop/BouncingBirdTitel.png").getImage();
     Image titelBwB = new ImageIcon("/Users/uni/Desktop/background_18.png").getImage();
@@ -22,6 +23,8 @@ public class MenuFundament extends JPanel implements Observer {
 
 
     public MenuFundament() {
+
+        menuController = new MenuController();
 
         setPreferredSize(new Dimension(438, 768));
         this.setLayout(null);
