@@ -3,7 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MenuController implements ActionListener{
-    Gametesterneu gmn;
+    Gamerunner gm;
 
     MenuFundament menuFundament;
     MenuController menuController;
@@ -20,7 +20,7 @@ public class MenuController implements ActionListener{
 
     public MenuController() {
 
-        gmn = new Gametesterneu();
+        gm = new Gamerunner();
 
         menuFundament = new MenuFundament();
         menuController = new MenuController();
@@ -39,12 +39,11 @@ public class MenuController implements ActionListener{
         this.sbList = sbL;
         this.settList = settL;
     }
-
     @Override
         public void actionPerformed(ActionEvent e) {
 
-            if (e.getSource() == menuPanel.settingsBut ) {
-                gmn.setvisible(settingspanel);
+            if (e.getSource() == menuFundament.settingsBut) {
+                System.out.println("jjaa");
             }
         }
 }

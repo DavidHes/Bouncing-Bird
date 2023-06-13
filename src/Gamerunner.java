@@ -1,11 +1,29 @@
 import javax.swing.*;
+import java.awt.*;
 
-public class Gamerunner {
-    public static void main(String[] args) {
+public class Gamerunner extends JFrame {
 
-        Gametesterneu game = new Gametesterneu();
-        game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        game.pack();
-        game.setVisible(true);
+    GamePanel gamePanel;
+    ScoreBoardPanel sbp;
+    RateGamePanel rgp;
+    MenuPanel menuPanel;
+    public Gamerunner() {
+
+        menuPanel = new MenuPanel();
+        rgp = new RateGamePanel();
+        sbp = new ScoreBoardPanel();
+        gamePanel = new GamePanel();
+
+        this.pack();
+        this.setLayout(null);
+        this.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.getContentPane().add(menuPanel);
+    }
+
+    public void setvisible(JPanel j){
+        this.getContentPane().removeAll();
+        this.getContentPane().add(j);
+
     }
 }
