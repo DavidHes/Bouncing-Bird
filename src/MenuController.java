@@ -3,10 +3,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MenuController implements ActionListener{
-    Gamerunner gm;
 
     MenuFundament menuFundament;
-    MenuController menuController;
     GameController gameController;
     RateGamePanel rgp;
     ScoreBoardPanel sbp;
@@ -20,10 +18,7 @@ public class MenuController implements ActionListener{
 
     public MenuController() {
 
-        gm = new Gamerunner();
-
         menuFundament = new MenuFundament();
-        menuController = new MenuController();
         gameController = new GameController();
         rgp = new RateGamePanel();
         sbp = new ScoreBoardPanel();
@@ -42,8 +37,18 @@ public class MenuController implements ActionListener{
     @Override
         public void actionPerformed(ActionEvent e) {
 
-            if (e.getSource() == menuFundament.settingsBut) {
-                System.out.println("jjaa");
+            if (e.getSource() == gamepanel.backToMenuBut) {
+                menuPanel.setVisible(true);
+                gamepanel.setVisible(false);
             }
+        if (e.getSource() == menuFundament.scoreBoardBut) {
+            System.out.println("button funktionier");
+            settingspanel.setVisible(false);
+            menuPanel.setVisible(false);
+            gamepanel.setVisible(false);
+            rgp.setVisible(false);
+            sbp.setVisible(true);
+            System.out.println("button funktionier");
+        }
         }
 }

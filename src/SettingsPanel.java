@@ -1,19 +1,12 @@
 import java.awt.event.ActionListener;
 
 public class SettingsPanel extends MenuFundament{
-    MenuController menuController;
 
     public SettingsPanel(){
 
         add(startGameBut);
-        add(startGameBut);
-        add(startGameBut);
-        add(startGameBut);
-
-
-        menuController = new MenuController();
-
-        this.add(backToMenuBut);
+        add(scoreBoardBut);
+        add(backToMenuBut);
 
     }
     private void innitComponents(){

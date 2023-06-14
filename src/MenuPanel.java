@@ -5,20 +5,17 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class MenuPanel extends MenuFundament{
-    MenuController menuController;
     RateGamePanel rgp;
     ScoreBoardPanel sbp;
     SettingsPanel settingspanel;
     GamePanel gamepanel;
-    MenuPanel menuPanel;
+
 	public MenuPanel() {
 
-        menuController = new MenuController();
         rgp = new RateGamePanel();
         sbp = new ScoreBoardPanel();
         settingspanel = new SettingsPanel();
         gamepanel = new GamePanel();
-        menuPanel = new MenuPanel();
 
             add(startGameBut);
             add(scoreBoardBut);

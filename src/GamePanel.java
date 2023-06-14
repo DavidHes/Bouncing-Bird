@@ -45,6 +45,7 @@ public class GamePanel extends MenuFundament {
 
         backToMenuBut.setBounds(144, 450, 150, 50);
 
+        this.add(backToMenuBut);
 
         if (spielmenuvisible == true) {
 
@@ -106,9 +107,9 @@ public class GamePanel extends MenuFundament {
 
     public void addController(GameController game) {
         this.gameController = game;
-        restartBut.addActionListener((ActionListener) gameController);
-        backToMenuBut.addActionListener((ActionListener) gameController);
-        addscore.addActionListener((ActionListener) gameController);
+       // restartBut.addActionListener(gameController);
+        backToMenuBut.addActionListener(menuController);
+       // addscore.addActionListener(gameController);
     }
     public void spawnTube() {
 
