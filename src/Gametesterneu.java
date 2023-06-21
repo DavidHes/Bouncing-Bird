@@ -4,7 +4,6 @@ public class Gametesterneu{
 
     public static void main(String[] args) {
 
-    JFrame frame = new JFrame();
     MenuFundament menuFundament = new MenuFundament();
     MenuController menuController = new MenuController();
     GameController gameController = new GameController();
@@ -29,17 +28,6 @@ public class Gametesterneu{
         menuFundament.addController(menuController);
         gamepanel.addController(gameController);
 
-        frame.add(rgp);
-        frame.add(sbp);
-        frame.add(menuPanel);
-        frame.add(gamepanel);
-        frame.add(settingspanel);
-
-        //    frame.getContentPane().add(menuPanel);
-
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
 }
         //   rgp.addController(menuController);
         //  sbp.addController(menuController);

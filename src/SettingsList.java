@@ -5,8 +5,9 @@ public class SettingsList extends Observable {
     public SettingsList() {
     }
 
-   // public void setSkin(settList: FileWriter){
-   // }
+   public void setSkin(){
+        notifyObservers();
+   }
 
    // public void setBackground(settList: FileWriter){
    // }

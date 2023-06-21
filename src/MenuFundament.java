@@ -7,13 +7,12 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.*;
+
 public class MenuFundament extends JPanel implements Observer {
     JButton startGameBut, scoreBoardBut, settingsBut , rateGameBut, backToMenuBut;
-
-    MenuController menuController;
+final int width = 750, height = 435;
+    private MenuController menuCon;
 
     GameController gameController;
 
@@ -23,6 +22,7 @@ public class MenuFundament extends JPanel implements Observer {
 
 
     public MenuFundament() {
+
 
         setPreferredSize(new Dimension(438, 768));
         this.setLayout(null);
@@ -47,13 +47,13 @@ public class MenuFundament extends JPanel implements Observer {
 
     }
 
-    public void addController(MenuController menu) {
-        this.menuController = menu;
-        rateGameBut.addActionListener(menuController);
-        startGameBut.addActionListener(menuController);
-        scoreBoardBut.addActionListener(menuController);
-        settingsBut.addActionListener(menuController);
-        backToMenuBut.addActionListener(menuController);
+    public void addController(MenuController menuCon) {
+        this.menuCon = menuCon;
+        rateGameBut.addActionListener(menuCon);
+        startGameBut.addActionListener(menuCon);
+        scoreBoardBut.addActionListener(menuCon);
+        settingsBut.addActionListener(menuCon);
+        backToMenuBut.addActionListener(menuCon);
 
     }
 
