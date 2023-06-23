@@ -2,6 +2,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.Timer;
@@ -27,10 +30,19 @@ public class GamePanel extends MenuFundament {
     // Timer dropTimer = new Timer(20, new MoveListener());
     // Timer  gameOverDropTimer = new Timer(10, new GameoverListener());
 
-  //  Image tubeDown = new ImageIcon("/Users/uni/Desktop/tubeDown.png").getImage();
-   // Image tubeup = new ImageIcon("/Users/uni/Desktop/tube.png").getImage();
+    Image tubeDown = new ImageIcon("/Users/uni/Desktop/tubeDown.png").getImage();
+    Image tubeup = new ImageIcon("/Users/uni/Desktop/tube.png").getImage();
+    GameController gameController;
+    private MouseListener mouseListener;
+    private KeyListener keyListener;
 
-    public GamePanel() {
+    public GamePanel(GameController gameController) {
+        super();
+        this.gameController = gameController;
+        this.addMouseListener(gameController);
+        this.addKeyListener(gameController);
+        this.setFocusable(true);
+        addController(gameController); // Hinzugefügt
 
         restartBut = new JButton("Play Again");
         restartBut.setBounds(144, 250, 150, 50);
@@ -40,8 +52,12 @@ public class GamePanel extends MenuFundament {
 
         backToMenuBut.setBounds(144, 450, 150, 50);
 
-        if(spielmenuvisible== true){
-           this.gameoverbild();
+        setFocusable(true);
+        requestFocus();
+
+
+        if (spielmenuvisible) {
+            this.gameoverbild();
         }
     }
 
@@ -75,13 +91,12 @@ public class GamePanel extends MenuFundament {
 
     }
 
+
     public void addController(GameController game) {
         this.gameController = game;
-        //restartBut.addActionListener(gameController);
-        backToMenuBut.addActionListener(gameController);
-        scoreBoardBut.addActionListener(gameController);
-
-        // addscore.addActionListener(gameController);
+        addMouseListener(gameController);
+        addKeyListener(gameController);
+        setFocusable(true);
     }
 
     public void spawnTube(Graphics g) {
@@ -109,8 +124,8 @@ public class GamePanel extends MenuFundament {
     public void restartTheGame() {
 
         String clickToStartText = "Click with mouse or press Enter to Start!";
-     gameover = false;
-     spielmenuvisible = false;
+        gameover = false;
+        spielmenuvisible = false;
 
     }
     public void drawbird(Graphics g) {
@@ -137,26 +152,27 @@ public class GamePanel extends MenuFundament {
         }
     }
     public void movetube () {
-      if(clickToStartText == clearClickToStartText && gameover == false) {
-          tube[0] -= tubeXValocity;
-          tube[1] -= tubeXValocity;
-      }
+        if(clickToStartText == clearClickToStartText && gameover == false) {
+            tube[0] -= tubeXValocity;
+            tube[1] -= tubeXValocity;
+        }
     }
 
     public void startgame () {
         clickToStartText = clearClickToStartText;
+        repaint();
+
     }
-        public void checkTubeCollusion (){
+    public void checkTubeCollusion (){
 
         for(int i = 0; i < 2; i++){
             if(tube[i] <= 100 && tube[i] + tubeWidth >= 100 || tube[i] <= 75 && tube[i] + tubeWidth >= 75){
-               if ((birdyPOS + birdV) >= 0 && (birdyPOS + birdV) <= gap[i]
-                || (birdyPOS + birdV + 25) >= gap[i] + 100 && (birdyPOS + birdV + 25) <= HEIGHT) {
-                   gameover = true;
-                   spielmenuvisible = true;
-               }
+                if ((birdyPOS + birdV) >= 0 && (birdyPOS + birdV) <= gap[i]
+                        || (birdyPOS + birdV + 25) >= gap[i] + 100 && (birdyPOS + birdV + 25) <= HEIGHT) {
+                    gameover = true;
+                    spielmenuvisible = true;
+                }
             }
         }
     }
 }
-

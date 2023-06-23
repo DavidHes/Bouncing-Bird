@@ -1,14 +1,22 @@
-import javax.swing.*;
-
 public class Gametesterneu{
 
     public static void main(String[] args) {
 
-    MenuFundament menuFundament = new MenuFundament();
+        GameController gameController = new GameController();
+        MenuController menuController = new MenuController();
+        MenuFundament menuFundament = new MenuFundament();
+        MenuPanel menuPanel = new MenuPanel();
+
+        GamePanel gamePanel = new GamePanel(gameController);
+
+
+
+
+   /* MenuFundament menuFundament = new MenuFundament();
     MenuController menuController = new MenuController();
     GameController gameController = new GameController();
     RateGamePanel rgp = new RateGamePanel();
-    ScoreBoardPanel sbp = new ScoreBoardPanel();
+    ScoreboardPanel sbp = new ScoreboardPanel();
     SettingsPanel settingspanel = new SettingsPanel();
     GamePanel gamepanel = new GamePanel();
     RateGameList rgList = new RateGameList();
@@ -33,5 +41,6 @@ public class Gametesterneu{
         //  sbp.addController(menuController);
         //  settingspanel.addController(menuController);
         //    menuPanel.addController(menuController);
-
+*/
+    }
     }

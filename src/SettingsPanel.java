@@ -1,20 +1,13 @@
 import java.awt.event.ActionListener;
 
-public class SettingsPanel extends MenuFundament{
+public class SettingsPanel extends MenuFundament {
 
-    public SettingsPanel(){
+    public SettingsPanel(ActionListener actionListener) {
 
-        add(startGameBut);
-        add(scoreBoardBut);
+        super();
         add(backToMenuBut);
+        backToMenuBut.addActionListener(actionListener);
 
     }
-    private void innitComponents(){
-    }
-    private void layoutComponents(){
-    }
-    private void createImageButton(String imagePath){
-    }
-
 
 }

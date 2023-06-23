@@ -1,8 +1,9 @@
 import java.awt.event.ActionListener;
 
-public class RateGamePanel extends MenuFundament {
+public class ScoreboardPanel extends MenuFundament {
 
-    public RateGamePanel(ActionListener actionListener) {
+    public ScoreboardPanel(ActionListener actionListener) {
+
         add(backToMenuBut);
 
         backToMenuBut.addActionListener(actionListener);

@@ -1,7 +1,5 @@
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
@@ -11,14 +9,14 @@ import javax.swing.*;
 
 public class MenuFundament extends JPanel implements Observer {
     JButton startGameBut, scoreBoardBut, settingsBut , rateGameBut, backToMenuBut;
-final int width = 750, height = 435;
+    final int width = 750, height = 435;
     private MenuController menuCon;
 
     GameController gameController;
 
-    Image titelBB = new ImageIcon("/Users/uni/Desktop/BouncingBirdTitel.png").getImage();
-    Image titelBwB = new ImageIcon("/Users/uni/Desktop/background_18.png").getImage();
-    Image grünbird = new ImageIcon("/Users/uni/Desktop/GrünB.png").getImage();
+    Image titelBB = new ImageIcon("BouncingBirdTitel.png").getImage();
+    Image titelBwB = new ImageIcon("background_18.png").getImage();
+    Image grünbird = new ImageIcon("GrünB.png").getImage();
 
 
     public MenuFundament() {
@@ -34,16 +32,27 @@ final int width = 750, height = 435;
         rateGameBut = new JButton("Rate Game");
         backToMenuBut = new JButton("Back to Menu");
 
-       // startGameBut.addActionListener(new ButtonListener());
-      //  scoreBoardBut.addActionListener(new ButtonListener());
-       // settingsBut.addActionListener(new ButtonListener());
-     //   rateGameBut.addActionListener(new ButtonListener());
+
+
+
+        //startGameBut.addActionListener(new ButtonListener());
+        //  scoreBoardBut.addActionListener(new ButtonListener());
+        // settingsBut.addActionListener(new ButtonListener());
+        //   rateGameBut.addActionListener(new ButtonListener());
 
         startGameBut.setBounds(144, 250, 150, 50);
         scoreBoardBut.setBounds(144, 350, 150, 50);
         settingsBut.setBounds(144, 450, 150, 50);
         rateGameBut.setBounds(144, 550, 150, 50);
-        backToMenuBut.setBounds(144, 350, 150, 50);
+        backToMenuBut.setBounds(144, 650, 150, 50);
+
+        /*startGameBut.addActionListener(menuCon);
+        scoreBoardBut.addActionListener(menuCon);
+        settingsBut.addActionListener(menuCon);
+        rateGameBut.addActionListener(menuCon);
+        backToMenuBut.addActionListener(menuCon);
+
+         */
 
     }
 
