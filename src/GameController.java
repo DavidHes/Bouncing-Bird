@@ -12,6 +12,7 @@ public class GameController implements ActionListener, MouseListener, KeyListene
     RateGameList rgList;
     ScoreboardList sbList;
     SettingsList settList;
+    Timer time = new Timer (40, this::actionPerformed);
 
     public GameController() {
 
@@ -25,8 +26,6 @@ public class GameController implements ActionListener, MouseListener, KeyListene
         settList = new SettingsList();
         menuPanel = new MenuPanel();
 
-        new Timer(40, this::actionPerformed).start();
-
     }
     public void addModel (RateGameList rgL, ScoreboardList sbL,SettingsList settL ){
         this.rgList = rgL;
@@ -36,98 +35,62 @@ public class GameController implements ActionListener, MouseListener, KeyListene
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+          gamepanel.checkTubeCollusion();
+          gamepanel.checkBorderCollusion();
+
           gamepanel.dropbird();
           gamepanel.movetube();
+
+          if(e.getSource()== gamepanel.restartBut){
+              gamepanel.restartTheGame();
+          }
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
     }
-
     @Override
     public void mousePressed(MouseEvent e) {
-
+        gamepanel.startgame();
         gamepanel.changebirdcord();
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
     }
-
     @Override
     public void mouseEntered(MouseEvent e) {
-
     }
-
     @Override
     public void mouseExited(MouseEvent e) {
-
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
-
     }
-
     @Override
     public void keyPressed(KeyEvent e) {
 
         int code = e.getKeyCode();
 
+        if(code == e.VK_ENTER) {
+            gamepanel.startgame();
+        }
+
         if(code == e.VK_SPACE){
             gamepanel.changebirdcord();
         }
-
     }
-
     @Override
     public void keyReleased(KeyEvent e) {
-
     }
 
-    public class startgameListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-         //   if(e.getSource() == startBut) {
-            //    gameover = false;
-            //    visible = false;
-          //  }
-
-        //    if(e.getSource() == but5) {
-
-         //   }
-        }
-    }
-
-   /* public class MyMouseListener implements MouseListener {
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-       }
-      @Override
-       public void mousePressed(MouseEvent e) {
-        //    if(gameover == false) {
-          //      start = St;
-         //       birdyPOS = birdyPOS - inc;
-           //     time.stop();
-         //  }
-        }
-        @Override
-        public void mouseReleased(MouseEvent e) {
-          //  if(gameover == false) {
-              //  time.start();
-           // }
-        }
-        @Override
-        public void mouseEntered(MouseEvent e) {
-        }
-        @Override
-        public void mouseExited(MouseEvent e) {
-        }
-    }
-    */
+    //public class startgameListener implements ActionListener {
+     //   @Override
+    //    public void actionPerformed(ActionEvent e) {
+     //   }
+  //  }
 
     public class MoveListener implements ActionListener {
         @Override
@@ -141,7 +104,7 @@ public class GameController implements ActionListener, MouseListener, KeyListene
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            //birdyPOS = birdyPOS + gameoverdrop;
+
         }
     }
 }
