@@ -31,7 +31,7 @@ public class MenuController implements ActionListener {
         sbList = new ScoreboardList();
         settList = new SettingsList();
         menuPanel = new MenuPanel();
-        gameController = new GameController();
+        gameController = new GameController(gamePanel);
 
       /*  frame.add(rateGamePanel);
         frame.add(scoreboardPanel);
@@ -63,23 +63,9 @@ public class MenuController implements ActionListener {
         }
     }
     private void showPanel(JPanel jPanel, String info) {
-       /* menuPanel.setVisible(false);
-        gamePanel.setVisible(false);
-        settingsPanel.setVisible(false);
-        rateGamePanel.setVisible(false);
-        scoreboardPanel.setVisible(false);
-
-
-        frame.add(jPanel);
-        jPanel.setVisible(true);
-        System.out.println(info);
-
-        */
-
         frame.getContentPane().removeAll();
         frame.getContentPane().add(jPanel);
         jPanel.requestFocusInWindow();
-
         frame.revalidate();
         frame.repaint();
     }

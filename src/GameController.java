@@ -1,20 +1,27 @@
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class GameController implements ActionListener, MouseListener, KeyListener {
+    private GamePanel gamePanel;
+    private boolean gameStarted = false;
 
     MenuFundament menuFundament;
     RateGamePanel rgp;
     ScoreboardPanel sbp;
     SettingsPanel settingspanel;
-    GamePanel gamepanel;
     MenuPanel menuPanel;
     RateGameList rgList;
     ScoreboardList sbList;
     SettingsList settList;
     Timer time;
 
-    public GameController() {
+    public GameController(GamePanel gamePanel) {
+
         menuFundament = new MenuFundament();
         rgp = new RateGamePanel(this);
         sbp = new ScoreboardPanel(this);
@@ -24,11 +31,17 @@ public class GameController implements ActionListener, MouseListener, KeyListene
         settList = new SettingsList();
         menuPanel = new MenuPanel();
 
-        gamepanel = new GamePanel(this);
-        gamepanel.addMouseListener(this);
-        gamepanel.addKeyListener(this);
+        this.gamePanel = gamePanel;
+        gamePanel.addMouseListener(this);
+        gamePanel.addKeyListener(this);
+        gamePanel.backToMenuBut.addActionListener(this);
+        gamePanel.restartBut.addActionListener(this);
+        gamePanel.scorename.addActionListener(this);
+
 
         time = new Timer(40, this::actionPerformed);
+        time.start();
+
     }
 
     public void addModel(RateGameList rgL, ScoreboardList sbL, SettingsList settL) {
@@ -37,87 +50,88 @@ public class GameController implements ActionListener, MouseListener, KeyListene
         this.settList = settL;
     }
 
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("3");
-        gamepanel.checkTubeCollusion();
-        gamepanel.checkBorderCollusion();
+        //System.out.println("gehts los?");
+        if (gameStarted) {
+            //System.out.println("los");
+            gamePanel.checkTubeCollusion();
+            gamePanel.checkBorderCollusion();
 
-        gamepanel.dropbird();
-        gamepanel.movetube();
+            gamePanel.updateScore();
+            gamePanel.dropbird();
+            gamePanel.movetube();
+        }
 
-        if(e.getSource()== gamepanel.restartBut){
-            gamepanel.restartTheGame();
+        if (e.getSource() == gamePanel.backToMenuBut) {
+            System.out.println("hgä");
+            MenuController menuController = new MenuController();
+            gamePanel.backToMenu();
+        }
+
+        if (e.getSource() == gamePanel.restartBut) {
+            System.out.println("hgä");
+            gamePanel.restartTheGame();
         }
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("mouseClicked");
+        //Startet das Spiel, sobald der Spieler auf den Bildschirm mit der Maus klickt bzw. auf die Entertaste drückt
+        if (!gameStarted) {
+            gameStarted = true;
+            gamePanel.startgame();
+        }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        System.out.println("mousePressed");
-        gamepanel.startgame();
-        gamepanel.changebirdcord();
+        System.out.println("Maus wurde gedrückt");
+
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        System.out.println("mouseReleased");
+        System.out.println("Maus wurde released");
+
     }
+
     @Override
     public void mouseEntered(MouseEvent e) {
-        System.out.println("mouseEntered");
+        System.out.println("Maus wurde geenterd");
+
     }
+
     @Override
     public void mouseExited(MouseEvent e) {
-        System.out.println("mouseExited");
+        System.out.println("Maus wurde exit");
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
-        System.out.println("keyTyped");
+        System.out.println("Tastur schreiben");
     }
+
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("keyPressed");
-        int code = e.getKeyCode();
-
-        if (code == KeyEvent.VK_ENTER) {
-            gamepanel.startgame();
+        System.out.println("Tastendruck");
+        if (e.getKeyCode() == KeyEvent.VK_ENTER && !gameStarted) {
+            System.out.println("Game startet");
+            // Starte das Spiel, wenn der Benutzer die Eingabetaste drückt
+            gameStarted = true;
+            gamePanel.startgame();
         }
-
-        if (code == KeyEvent.VK_SPACE) {
-            gamepanel.changebirdcord();
+        if (e.getKeyCode() == KeyEvent.VK_SPACE && gameStarted) {
+            System.out.println("Game läuft");
+            gamePanel.changebirdcord();
         }
     }
+
     @Override
     public void keyReleased(KeyEvent e) {
-        System.out.println("keyReleased");
+        System.out.println("Tastendruck losgelassen");
+
     }
 
-    //public class startgameListener implements ActionListener {
-    //   @Override
-    //    public void actionPerformed(ActionEvent e) {
-    //   }
-    //  }
-
-    public class MoveListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("2");
-            //  birdyPOS = birdyPOS + drop;
-        }
-    }
-
-    public class GameoverListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("1");
-
-
-        }
-    }
 }

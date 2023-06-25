@@ -9,7 +9,7 @@ import javax.swing.*;
 
 public class MenuFundament extends JPanel implements Observer {
     JButton startGameBut, scoreBoardBut, settingsBut , rateGameBut, backToMenuBut;
-    final int width = 750, height = 435;
+    final int frameWidth = 435, frameHeight = 750;
     private MenuController menuCon;
 
     GameController gameController;
@@ -22,7 +22,7 @@ public class MenuFundament extends JPanel implements Observer {
     public MenuFundament() {
 
 
-        setPreferredSize(new Dimension(438, 768));
+        setPreferredSize(new Dimension(frameWidth, frameHeight));
         this.setLayout(null);
         //	this.setBackground(new Color(185, 220, 255));
 

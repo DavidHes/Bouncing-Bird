@@ -1,13 +1,22 @@
-public class Gametesterneu{
+public class Gametesterneu {
 
+
+    public static GamePanel gamePanel;
+    public static GameController gameController;
     public static void main(String[] args) {
 
-        GameController gameController = new GameController();
+
+
+
+        gamePanel = new GamePanel(gameController);
+        gameController = new GameController(gamePanel);
+
+        // Erzeuge GameController-Objekt und übergebe das GamePanel-Objekt
+
         MenuController menuController = new MenuController();
         MenuFundament menuFundament = new MenuFundament();
         MenuPanel menuPanel = new MenuPanel();
 
-        GamePanel gamePanel = new GamePanel(gameController);
 
 
 
