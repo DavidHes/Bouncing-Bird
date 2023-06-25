@@ -15,18 +15,18 @@ public class MenuController implements ActionListener {
     ScoreboardList sbList;
     SettingsList settList;
     GameController gameController;
+    private JPanel currentPanel;
 
 
     public MenuController() {
 
         frame = new JFrame();
 
-
         menuFundament = new MenuFundament();
         rateGamePanel = new RateGamePanel(this);
         scoreboardPanel = new ScoreboardPanel(this);
         settingsPanel = new SettingsPanel(this);
-        gamePanel = new GamePanel(gameController);
+        gamePanel = new GamePanel(gameController, this);
         rgList = new RateGameList();
         sbList = new ScoreboardList();
         settList = new SettingsList();
@@ -59,16 +59,26 @@ public class MenuController implements ActionListener {
         } else if (buttonLabel.equals("Rate Game")) {
             showPanel(rateGamePanel, "Infos zu Rate Game");
         } else if (buttonLabel.equals("Back to Menu")) {
+            if (currentPanel == gamePanel) {
+                System.out.println("Panel nach restart Game");
+                gamePanel.restartTheGame();
+                gameController = new GameController(gamePanel);//Hierdurch wird das Spiel immer schneller also noch verbesserungsfähig
+            }
             showPanel(menuPanel, "Back to menu");
         }
     }
+
     private void showPanel(JPanel jPanel, String info) {
         frame.getContentPane().removeAll();
-        frame.getContentPane().add(jPanel);
+        currentPanel = jPanel;
+        frame.getContentPane().add(currentPanel);
         jPanel.requestFocusInWindow();
         frame.revalidate();
         frame.repaint();
     }
 }
+
+
+
 
 

@@ -33,15 +33,19 @@ public class GamePanel extends MenuFundament {
 
     Image tubeDown = new ImageIcon("/Users/uni/Desktop/tubeDown.png").getImage();
     Image tubeup = new ImageIcon("/Users/uni/Desktop/tube.png").getImage();
-    GameController gameController;
+
     JTextField scorename = new JTextField("Name...", 20);
     private MouseListener mouseListener;
     private KeyListener keyListener;
 
 
-    public GamePanel(GameController gameController) {
+    public GamePanel(GameController gameController, ActionListener actionListener) {
         super();
         this.gameController = gameController;
+        this.addMouseListener(gameController);
+        this.addKeyListener(gameController);
+        this.setFocusable(true);
+        addController(gameController);
 
         restartBut = new JButton("Play Again");
         restartBut.setBounds(144, 250, 150, 50);
@@ -50,17 +54,15 @@ public class GamePanel extends MenuFundament {
         addscore.setBounds(144, 350, 150, 50);
 
         backToMenuBut.setBounds(144, 450, 150, 50);
+        backToMenuBut.addActionListener(actionListener);
 
-       // setFocusable(true);
-       // requestFocus();
-
-        addController(gameController);
-
-
-      /*  if (spielmenuvisible) {
-            this.gameoverbild();
-        }*/
+        setFocusable(true);
+        requestFocusInWindow();
     }
+
+
+
+
 
 
     public void startgame() {
@@ -99,15 +101,17 @@ public class GamePanel extends MenuFundament {
         this.gameController = game;
         addMouseListener(gameController);
         addKeyListener(gameController);
+
         if(gameover == true) {
-            add(backToMenuBut);
             add(restartBut);
             add(addscore);
             add(scorename);
+            add(backToMenuBut);
         }
 
         setFocusable(true);
     }
+
 
     public void spawnTube(Graphics g) {
 
@@ -136,6 +140,7 @@ public class GamePanel extends MenuFundament {
     }
 
     public void restartTheGame() {
+        clickToStartText = "Click with mouse or press Enter to Start!";
         score = 0;
         birdxPOS = 75 ; birdyPOS = 300;
         birdV = 0; birdA = 8; birdI = 1;
@@ -150,9 +155,10 @@ public class GamePanel extends MenuFundament {
         remove(scorename);
 
         spielmenuvisible = false;
-        clickToStartText = "Click with mouse or press Enter to Start!";
         scorename = new JTextField("Name...", 20);
 
+        setFocusable(true);
+        requestFocusInWindow();
 
         repaint();
 
@@ -208,12 +214,6 @@ public class GamePanel extends MenuFundament {
                 score++;
             }
         }
-    }
-
-    public void backToMenu() {
-        MenuController menuController = new MenuController();
-        backToMenuBut.addActionListener(menuController);
-
     }
 
     public void checkTubeCollusion() {

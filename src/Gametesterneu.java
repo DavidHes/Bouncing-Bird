@@ -8,8 +8,8 @@ public class Gametesterneu {
 
 
 
-        gamePanel = new GamePanel(gameController);
-        gameController = new GameController(gamePanel);
+      //  gamePanel = new GamePanel(gameController);
+     //   gameController = new GameController(gamePanel);
 
         // Erzeuge GameController-Objekt und übergebe das GamePanel-Objekt
 

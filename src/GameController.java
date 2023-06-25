@@ -34,9 +34,14 @@ public class GameController implements ActionListener, MouseListener, KeyListene
         this.gamePanel = gamePanel;
         gamePanel.addMouseListener(this);
         gamePanel.addKeyListener(this);
+
+
         gamePanel.backToMenuBut.addActionListener(this);
         gamePanel.restartBut.addActionListener(this);
         gamePanel.scorename.addActionListener(this);
+        gamePanel.setFocusable(true);
+        gamePanel.requestFocusInWindow();
+
 
 
         time = new Timer(40, this::actionPerformed);
@@ -55,32 +60,31 @@ public class GameController implements ActionListener, MouseListener, KeyListene
     public void actionPerformed(ActionEvent e) {
         //System.out.println("gehts los?");
         if (gameStarted) {
-            //System.out.println("los");
+           // System.out.println("los");
             gamePanel.checkTubeCollusion();
             gamePanel.checkBorderCollusion();
 
             gamePanel.updateScore();
             gamePanel.dropbird();
             gamePanel.movetube();
-        }
 
-        if (e.getSource() == gamePanel.backToMenuBut) {
-            System.out.println("hgä");
-            MenuController menuController = new MenuController();
-            gamePanel.backToMenu();
         }
 
         if (e.getSource() == gamePanel.restartBut) {
             System.out.println("hgä");
             gamePanel.restartTheGame();
+            gameStarted = false;
         }
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        System.out.println("maus klickt");
+
         //Startet das Spiel, sobald der Spieler auf den Bildschirm mit der Maus klickt bzw. auf die Entertaste drückt
-        if (!gameStarted) {
+        if (gameStarted == false) {
             gameStarted = true;
+            System.out.println("JAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             gamePanel.startgame();
         }
     }
@@ -116,13 +120,13 @@ public class GameController implements ActionListener, MouseListener, KeyListene
     @Override
     public void keyPressed(KeyEvent e) {
         System.out.println("Tastendruck");
-        if (e.getKeyCode() == KeyEvent.VK_ENTER && !gameStarted) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER && gameStarted == false) {
             System.out.println("Game startet");
             // Starte das Spiel, wenn der Benutzer die Eingabetaste drückt
             gameStarted = true;
             gamePanel.startgame();
         }
-        if (e.getKeyCode() == KeyEvent.VK_SPACE && gameStarted) {
+        if (e.getKeyCode() == KeyEvent.VK_SPACE && gameStarted == true) {
             System.out.println("Game läuft");
             gamePanel.changebirdcord();
         }
