@@ -87,6 +87,9 @@ public class GameController implements ActionListener, MouseListener, KeyListene
             System.out.println("JAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             gamePanel.startgame();
         }
+        if(gameStarted== true){
+            gamePanel.changebirdcord();
+        }
     }
 
     @Override

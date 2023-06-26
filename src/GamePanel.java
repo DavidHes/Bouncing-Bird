@@ -16,11 +16,8 @@ public class GamePanel extends MenuFundament {
     int[] tube = {width, width + width / 2};
     int[] gap = {(int) (Math.random() * (frameHeight - 250)), (int) (Math.random() * (frameHeight - 250))};
 
-    // int jumpheight = 70;
-    // private int drop = 5;
-    //private int gameoverdrop = 7;
-    private Font myFont1 = new Font("Serif", Font.BOLD, 22);
-    private Font myFont = new Font("Serif", Font.BOLD, 52);
+    private Font myFont1 = new Font("Serif", Font.BOLD, 28);
+    private Font gameoverfont = new Font("Serif", Font.BOLD, 52);
 
     JButton restartBut, addscore;
     boolean spielmenuvisible = false, gameover = false;
@@ -93,6 +90,12 @@ public class GamePanel extends MenuFundament {
             g.setColor(Color.BLACK);
             g.setFont(myFont1);
             g.drawString("" + score, 205, 100);
+        }
+
+        if(gameover == true){
+            g.setColor(Color.BLACK);
+            g.setFont(gameoverfont);
+            g.drawString(gameovertext, 88, 200);
         }
     }
 
