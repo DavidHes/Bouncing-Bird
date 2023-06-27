@@ -48,19 +48,17 @@ public class GamePanel extends MenuFundament {
         restartBut.setBounds(144, 250, 150, 50);
 
         addscore = new JButton("Add Score");
-        addscore.setBounds(144, 350, 150, 50);
+        addscore.setBounds(144, 450, 150, 50);
 
-        backToMenuBut.setBounds(144, 450, 150, 50);
+        scorename.setBounds(144, 350, 150, 50);
+        scorename.setVisible(true);
+
+        backToMenuBut.setBounds(144, 550, 150, 50);
         backToMenuBut.addActionListener(actionListener);
 
         setFocusable(true);
         requestFocusInWindow();
     }
-
-
-
-
-
 
     public void startgame() {
         clickToStartText = clearClickToStartText;
