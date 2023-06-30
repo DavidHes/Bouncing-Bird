@@ -42,8 +42,6 @@ public class GameController implements ActionListener, MouseListener, KeyListene
         gamePanel.setFocusable(true);
         gamePanel.requestFocusInWindow();
 
-
-
         time = new Timer(40, this::actionPerformed);
         time.start();
 

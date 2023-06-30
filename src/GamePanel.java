@@ -31,7 +31,8 @@ public class GamePanel extends MenuFundament {
     Image tubeDown = new ImageIcon("/Users/uni/Desktop/tubeDown.png").getImage();
     Image tubeup = new ImageIcon("/Users/uni/Desktop/tube.png").getImage();
 
-    JTextField scorename = new JTextField("Name...", 20);
+    JTextField scorename = new JTextField("Name...", 30);
+
     private MouseListener mouseListener;
     private KeyListener keyListener;
 
@@ -47,11 +48,11 @@ public class GamePanel extends MenuFundament {
         restartBut = new JButton("Play Again");
         restartBut.setBounds(144, 250, 150, 50);
 
-        addscore = new JButton("Add Score");
-        addscore.setBounds(144, 450, 150, 50);
-
         scorename.setBounds(144, 350, 150, 50);
         scorename.setVisible(true);
+
+        addscore = new JButton("Add Score");
+        addscore.setBounds(144, 450, 150, 50);
 
         backToMenuBut.setBounds(144, 550, 150, 50);
         backToMenuBut.addActionListener(actionListener);
@@ -97,18 +98,17 @@ public class GamePanel extends MenuFundament {
         }
     }
 
-
     public void addController(GameController game) {
         this.gameController = game;
         addMouseListener(gameController);
         addKeyListener(gameController);
 
-        if(gameover == true) {
-            add(restartBut);
-            add(addscore);
-            add(scorename);
-            add(backToMenuBut);
-        }
+      //  if(gameover == true) {
+       //     add(restartBut);
+       //     add(addscore);
+        //    add(scorename);
+        //    add(backToMenuBut);
+      //  }
 
         setFocusable(true);
     }
@@ -135,12 +135,13 @@ public class GamePanel extends MenuFundament {
 
         add(restartBut);
         add(backToMenuBut);
+        add(scorename);
         add(addscore);
-
 
     }
 
     public void restartTheGame() {
+
         clickToStartText = "Click with mouse or press Enter to Start!";
         score = 0;
         birdxPOS = 75 ; birdyPOS = 300;
@@ -150,13 +151,15 @@ public class GamePanel extends MenuFundament {
         gap [0] = (int) (Math.random() * (frameHeight - 250));
         gap [1] = (int) (Math.random() * (frameHeight - 250));
         gameover = false;
+        spielmenuvisible = false;
+
         remove(backToMenuBut);
         remove(restartBut);
         remove(addscore);
         remove(scorename);
 
-        spielmenuvisible = false;
-        scorename = new JTextField("Name...", 20);
+        scorename = new JTextField("Name...", 30);
+        scorename.setVisible(true);
 
         setFocusable(true);
         requestFocusInWindow();
@@ -166,7 +169,8 @@ public class GamePanel extends MenuFundament {
     }
 
     public void drawbird(Graphics g) {
-        g.drawImage(grünbird, birdxPOS, birdyPOS + birdV, 25, 25, this);
+
+        g.drawImage(grünbird, birdxPOS, birdyPOS + birdV, 50, 40, this);
     }
 
     public void checkBorderCollusion() {
@@ -206,6 +210,7 @@ public class GamePanel extends MenuFundament {
 
 
     public JButton getRestartButton() {
+
         return restartBut;
     }
 
@@ -220,9 +225,13 @@ public class GamePanel extends MenuFundament {
     public void checkTubeCollusion() {
 
         for (int i = 0; i < 2; i++) {
-            if (tube[i] <= 100 && tube[i] + tubeWidth >= 100 || tube[i] <= 75 && tube[i] + tubeWidth >= 75) {
+
+            //if tube in front and on bird or is behind or on bird or bird is in the gap
+            if (tube[i] <= 125 && tube[i] + tubeWidth >= 125 || tube[i] <= 75 && tube[i] + tubeWidth >= 75) {
+                // if bird is over gap
                 if ((birdyPOS + birdV) >= 0 && (birdyPOS + birdV) <= gap[i]
-                        || (birdyPOS + birdV + 25) >= gap[i] + 100 && (birdyPOS + birdV + 25) <= frameHeight) {
+                        //or under gap
+                        || (birdyPOS + birdV + 40) >= gap[i] + 100 && (birdyPOS + birdV + 40) <= frameHeight) {
                     gameover = true;
                     spielmenuvisible = true;
                     System.out.println("Tube getroffen");
