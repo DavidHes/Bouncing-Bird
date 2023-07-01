@@ -11,6 +11,8 @@ public class GameController implements ActionListener, MouseListener, KeyListene
     private boolean gameStarted = false;
 
     MenuFundament menuFundament;
+
+    //überföüssig
     RateGamePanel rgp;
     ScoreboardPanel sbp;
     SettingsPanel settingspanel;
@@ -23,14 +25,15 @@ public class GameController implements ActionListener, MouseListener, KeyListene
     public GameController(GamePanel gamePanel) {
 
         menuFundament = new MenuFundament();
-        rgp = new RateGamePanel(this);
-        sbp = new ScoreboardPanel(this);
-        settingspanel = new SettingsPanel(this);
+
+
+      //  rgp = new RateGamePanel(this);
+      //  sbp = new ScoreboardPanel(this);
+        // settingspanel = new SettingsPanel(this);
         rgList = new RateGameList();
         sbList = new ScoreboardList();
         settList = new SettingsList();
-        menuPanel = new MenuPanel();
-
+     // überflüssig   menuPanel = new MenuPanel();
         this.gamePanel = gamePanel;
         gamePanel.addMouseListener(this);
         gamePanel.addKeyListener(this);
@@ -73,6 +76,8 @@ public class GameController implements ActionListener, MouseListener, KeyListene
             gamePanel.restartTheGame();
             gameStarted = false;
         }
+
+
     }
 
     @Override

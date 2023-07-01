@@ -43,13 +43,16 @@ public class GamePanel extends MenuFundament {
         this.addMouseListener(gameController);
         this.addKeyListener(gameController);
         this.setFocusable(true);
-        addController(gameController);
+
+        // überflüssig
+       // addController(gameController);
 
         restartBut = new JButton("Play Again");
         restartBut.setBounds(144, 250, 150, 50);
 
         scorename.setBounds(144, 350, 150, 50);
         scorename.setVisible(true);
+        scorename.addActionListener(actionListener);
 
         addscore = new JButton("Add Score");
         addscore.setBounds(144, 450, 150, 50);
@@ -80,6 +83,8 @@ public class GamePanel extends MenuFundament {
             g.setFont(myFont1);
             g.drawString("" + score, 205, 100);
 
+            repaint();
+
         } else {
             g.setColor(Color.BLACK);
             g.setFont(myFont1);
@@ -89,6 +94,8 @@ public class GamePanel extends MenuFundament {
             g.setColor(Color.BLACK);
             g.setFont(myFont1);
             g.drawString("" + score, 205, 100);
+
+            repaint();
         }
 
         if(gameover == true){
@@ -176,7 +183,7 @@ public class GamePanel extends MenuFundament {
     public void checkBorderCollusion() {
         System.out.println(birdyPOS + birdV);
 
-        if (!(birdyPOS + birdV >= 0 && birdyPOS + birdV <= 750)) {
+        if (!(birdyPOS + birdV >= 0 && birdyPOS + birdV + 40 <= 750)) {
             System.out.println(birdyPOS + " + " + frameHeight);
             System.out.println("Border getroffen");
             gameover = true;

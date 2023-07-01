@@ -15,7 +15,7 @@ public class Gametesterneu {
 
         MenuController menuController = new MenuController();
         MenuFundament menuFundament = new MenuFundament();
-        MenuPanel menuPanel = new MenuPanel();
+        MenuPanel menuPanel = new MenuPanel(menuController);
 
 
 

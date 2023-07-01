@@ -51,7 +51,6 @@ public class MenuFundament extends JPanel implements Observer {
         settingsBut.addActionListener(menuCon);
         rateGameBut.addActionListener(menuCon);
         backToMenuBut.addActionListener(menuCon);
-
          */
 
     }

@@ -30,7 +30,7 @@ public class MenuController implements ActionListener {
         rgList = new RateGameList();
         sbList = new ScoreboardList();
         settList = new SettingsList();
-        menuPanel = new MenuPanel();
+        menuPanel = new MenuPanel(this);
         gameController = new GameController(gamePanel);
 
       /*  frame.add(rateGamePanel);
@@ -60,6 +60,7 @@ public class MenuController implements ActionListener {
             showPanel(rateGamePanel, "Infos zu Rate Game");
         } else if (buttonLabel.equals("Back to Menu")) {
             if (currentPanel == gamePanel) {
+                //verstehe ich nicht ganz - majd
                 System.out.println("Panel nach restart Game");
                 gamePanel.restartTheGame();
                 gameController = new GameController(gamePanel);//Hierdurch wird das Spiel immer schneller also noch verbesserungsfähig
@@ -73,6 +74,10 @@ public class MenuController implements ActionListener {
         currentPanel = jPanel;
         frame.getContentPane().add(currentPanel);
         jPanel.requestFocusInWindow();
+      //  When you make changes to the components within a container (such as adding or removing components),
+        // you need to notify the container to revalidate its layout.
+        // This is necessary to ensure that the components are properly positioned
+        //  and sized according to the updated layout rules.
         frame.revalidate();
         frame.repaint();
     }

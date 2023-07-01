@@ -6,7 +6,7 @@ public class MenuPanel extends MenuFundament {
     SettingsPanel settingspanel;
     GamePanel gamepanel;
 
-    public MenuPanel() {
+    public MenuPanel(MenuController menuController) {
         add(startGameBut);
         add(scoreBoardBut);
         add(rateGameBut);
