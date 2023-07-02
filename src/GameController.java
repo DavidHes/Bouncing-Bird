@@ -8,7 +8,7 @@ import java.awt.event.MouseListener;
 
 public class GameController implements ActionListener, MouseListener, KeyListener {
     private GamePanel gamePanel;
-    private boolean gameStarted = false;
+    public static boolean gameStarted = false;
 
     MenuFundament menuFundament;
 
@@ -87,7 +87,6 @@ public class GameController implements ActionListener, MouseListener, KeyListene
         //Startet das Spiel, sobald der Spieler auf den Bildschirm mit der Maus klickt bzw. auf die Entertaste drückt
         if (gameStarted == false) {
             gameStarted = true;
-            System.out.println("JAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             gamePanel.startgame();
         }
         if(gameStarted== true){

@@ -52,6 +52,7 @@ public class SettingsPanel extends MenuFundament {
         add(birdSkinButtons[2]);
         add(backgroundButtons[2]);
 
+
     }
 
     private JButton createImageButton(String imagePath) {
@@ -64,6 +65,7 @@ public class SettingsPanel extends MenuFundament {
         button.setFocusPainted(false);
         button.setContentAreaFilled(false);
         button.setName(imagePath);
+
         button.addActionListener(new ImageSelectionListener());
         return button;
     }
@@ -93,13 +95,25 @@ public class SettingsPanel extends MenuFundament {
 
             for (JButton birdButton : birdSkinButtons) {
                 if (birdButton == clickedButton) {
-                    selectedBirdButton = clickedButton;
+                    if (selectedBirdButton != null) {
+                            selectedBirdButton.setBorderPainted(false);
+                        }
+                        selectedBirdButton = birdButton;
+                        birdButton.setBorder(BorderFactory.createLineBorder(Color.GREEN, 20));
+                        birdButton.setBorderPainted(true);
+
                 }
             }
 
             for (JButton backgroundButton : backgroundButtons) {
                 if (backgroundButton == clickedButton) {
-                    selectedBackgroundButton = clickedButton;
+                  if (selectedBackgroundButton != null) {
+                            selectedBackgroundButton.setBorderPainted(false);
+                        }
+                        selectedBackgroundButton = backgroundButton;
+                        backgroundButton.setBorder(BorderFactory.createLineBorder(Color.GREEN, 20));
+                        backgroundButton.setBorderPainted(true);
+
                 }
             }
 

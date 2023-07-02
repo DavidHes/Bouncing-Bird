@@ -60,10 +60,8 @@ public class MenuController implements ActionListener {
             showPanel(rateGamePanel, "Infos zu Rate Game");
         } else if (buttonLabel.equals("Back to Menu")) {
             if (currentPanel == gamePanel) {
-                //verstehe ich nicht ganz - majd
-                System.out.println("Panel nach restart Game");
                 gamePanel.restartTheGame();
-                gameController = new GameController(gamePanel);//Hierdurch wird das Spiel immer schneller also noch verbesserungsfähig
+                GameController.gameStarted = false;
             }
             showPanel(menuPanel, "Back to menu");
         }
