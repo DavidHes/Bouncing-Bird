@@ -7,6 +7,7 @@ import java.io.IOException;
 
 public class SettingsPanel extends MenuFundament {
 
+    SettingsList settingsList = new SettingsList();
     private JButton[] birdSkinButtons;
     private JButton[] backgroundButtons;
     private JButton applyButton;
@@ -119,22 +120,24 @@ public class SettingsPanel extends MenuFundament {
 
             JButton selectedButton = (JButton) event.getSource();
 
-            try {
-                FileWriter writer = new FileWriter("Settings.txt", false); //false sorgt dafür, dass die txt überschrieben wird
+           // try {
+             //   FileWriter writer = new FileWriter("Settings.txt", false); //false sorgt dafür, dass die txt überschrieben wird
 
                 if (selectedBirdButton != null) {
-                    writer.write("Skin: " + selectedBirdButton.getName() + "\n");
+                    settingsList.setSkin("VOGELSKIN", selectedBirdButton.getName());
+                  //  writer.write("Skin: " + selectedBirdButton.getName() + "\n");
                 }
 
                 if (selectedBackgroundButton != null) {
-                    writer.write("Background: " + selectedBackgroundButton.getName() + "\n");
+                    settingsList.setBackground("HINTERGRUND", selectedBackgroundButton.getName());
+                  //  writer.write("Background: " + selectedBackgroundButton.getName() + "\n");
                 }
 
-                writer.close();
+               // writer.close();
 
-            } catch (IOException exception) {
-                System.out.println("Fehler beim Schreiben der Datei: " + exception.getMessage());
-            }
+           // } catch (IOException exception) {
+               // System.out.println("Fehler beim Schreiben der Datei: " + exception.getMessage());
+           // }
         }
     }
 }
