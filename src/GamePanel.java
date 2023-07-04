@@ -1,11 +1,10 @@
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JTextField;
 
 public class GamePanel extends MenuFundament {
     int score = 0;
@@ -34,7 +33,7 @@ public class GamePanel extends MenuFundament {
     Image tubeDown = new ImageIcon("/Users/uni/Desktop/tubeDown.png").getImage();
     Image tubeup = new ImageIcon("/Users/uni/Desktop/tube.png").getImage();
 
-    JTextField scorename = new JTextField("Name...", 30);
+    JTextField scorename;
 
     private MouseListener mouseListener;
     private KeyListener keyListener;
@@ -53,9 +52,12 @@ public class GamePanel extends MenuFundament {
         restartBut = new JButton("Play Again");
         restartBut.setBounds(144, 250, 150, 50);
 
+        scorename = new JTextField("Name.....");
         scorename.setBounds(144, 350, 150, 50);
+        scorename.setEditable(true);
         scorename.setVisible(true);
         scorename.addActionListener(actionListener);
+
 
         addscore = new JButton("Add Score");
         addscore.setBounds(144, 450, 150, 50);
@@ -150,6 +152,15 @@ public class GamePanel extends MenuFundament {
 
     }
 
+    public void addTheScore() {
+
+      String name = scorename.getText();
+     //vllt an der falschen Stelle
+      //addscore(score,name);
+        scorename.repaint();
+
+    }
+
     public void restartTheGame() {
 
         clickToStartText = "Click with mouse or press Enter to Start!";
@@ -168,9 +179,6 @@ public class GamePanel extends MenuFundament {
         remove(addscore);
         remove(scorename);
 
-        scorename = new JTextField("Name...", 30);
-        scorename.setVisible(true);
-
         setFocusable(true);
         requestFocusInWindow();
 
@@ -188,7 +196,7 @@ public class GamePanel extends MenuFundament {
 
         if (!(birdyPOS + birdV >= 0 && birdyPOS + birdV + 40 <= frameHeight)) {
             System.out.println(birdyPOS + " + " + frameHeight);
-            System.out.println("Border getroffen");
+         //   System.out.println("Border getroffen");
             gameover = true;
             spielmenuvisible = true;
             gameoverbild();

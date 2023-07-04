@@ -77,6 +77,14 @@ public class GameController implements ActionListener, MouseListener, KeyListene
             gameStarted = false;
         }
 
+        if (e.getSource() == gamePanel.addscore) {
+            System.out.println("haaaaaaä");
+            gamePanel.addTheScore();
+            gameStarted = false;
+        }
+
+
+
 
     }
 
