@@ -17,6 +17,7 @@ public class GamePanel extends MenuFundament {
     int[] gap = {(int) (Math.random() * (frameHeight - 250)), (int) (Math.random() * (frameHeight - 250))};
 
     private Font myFont1 = new Font("Serif", Font.BOLD, 28);
+    private Font myFont = new Font("Serif", Font.BOLD, 23);
     private Font gameoverfont = new Font("Serif", Font.BOLD, 52);
 
     JButton restartBut, addscore;
@@ -25,6 +26,8 @@ public class GamePanel extends MenuFundament {
 
     String gameovertext = "Game Over";
     String clickToStartText = "Click with mouse or press Enter to Start!", clearClickToStartText = "";
+
+
     // Timer dropTimer = new Timer(20, new MoveListener());
     // Timer  gameOverDropTimer = new Timer(10, new GameoverListener());
 
@@ -75,8 +78,8 @@ public class GamePanel extends MenuFundament {
 
         if (gameover == false) {
             g.setColor(Color.BLACK);
-            g.setFont(myFont1);
-            g.drawString(clickToStartText, 150, 400);
+            g.setFont(myFont);
+            g.drawString(clickToStartText, 11, 400);
             spawnTube(g);
             drawbird(g);
             g.setColor(Color.BLACK);
@@ -88,7 +91,7 @@ public class GamePanel extends MenuFundament {
         } else {
             g.setColor(Color.BLACK);
             g.setFont(myFont1);
-            g.drawString(clickToStartText, 150, 400);
+            g.drawString(clickToStartText, 11, 400);
             spawnTube(g);
             drawbird(g);
             g.setColor(Color.BLACK);
@@ -177,13 +180,13 @@ public class GamePanel extends MenuFundament {
 
     public void drawbird(Graphics g) {
 
-        g.drawImage(grünbird, birdxPOS, birdyPOS + birdV, 50, 40, this);
+        g.drawImage(grünbird, birdxPOS, birdyPOS + birdV, 40, 40, this);
     }
 
     public void checkBorderCollusion() {
         System.out.println(birdyPOS + birdV);
 
-        if (!(birdyPOS + birdV >= 0 && birdyPOS + birdV + 40 <= 750)) {
+        if (!(birdyPOS + birdV >= 0 && birdyPOS + birdV + 40 <= frameHeight)) {
             System.out.println(birdyPOS + " + " + frameHeight);
             System.out.println("Border getroffen");
             gameover = true;
@@ -234,7 +237,7 @@ public class GamePanel extends MenuFundament {
         for (int i = 0; i < 2; i++) {
 
             //if tube in front and on bird or is behind or on bird or bird is in the gap
-            if (tube[i] <= 125 && tube[i] + tubeWidth >= 125 || tube[i] <= 75 && tube[i] + tubeWidth >= 75) {
+            if (tube[i] <= 115 && tube[i] + tubeWidth >= 115 || tube[i] <= 75 && tube[i] + tubeWidth >= 75) {
                 // if bird is over gap
                 if ((birdyPOS + birdV) >= 0 && (birdyPOS + birdV) <= gap[i]
                         //or under gap

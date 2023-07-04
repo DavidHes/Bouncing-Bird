@@ -21,10 +21,8 @@ public class MenuFundament extends JPanel implements Observer {
 
     public MenuFundament() {
 
-
         setPreferredSize(new Dimension(frameWidth, frameHeight));
         this.setLayout(null);
-        //	this.setBackground(new Color(185, 220, 255));
 
         startGameBut = new JButton("Start Game");
         scoreBoardBut = new JButton("Scoreboard");
@@ -76,7 +74,7 @@ public class MenuFundament extends JPanel implements Observer {
         // TODO Auto-generated method stub
         super.paintComponent(g);
 
-        g.drawImage(titelBwB, 0, 0, 438, 768, this);
+        g.drawImage(titelBwB, 0, 0, frameWidth, frameHeight, this);
         repaint();
 
     }

@@ -19,7 +19,7 @@ public class MenuPanel extends MenuFundament {
         super.paintComponent(g);
 
         g.drawImage(titelBB, 44, -50, 350, 350, this);
-        g.drawImage(grünbird, 184, 10, 70, 50, this);
+        g.drawImage(grünbird, 184, 10, 60, 60, this);
 
         repaint();
     }
