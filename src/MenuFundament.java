@@ -15,7 +15,7 @@ public class MenuFundament extends JPanel implements Observer {
     GameController gameController;
 
     Image titelBB = new ImageIcon("BouncingBirdTitel.png").getImage();
-    Image titelBwB = new ImageIcon("background_18.png").getImage();
+    Image titelBwB = new ImageIcon("Hintergrund-Stadt-Tag.png").getImage();
     Image grünbird = new ImageIcon("GrünB.png").getImage();
 
 
