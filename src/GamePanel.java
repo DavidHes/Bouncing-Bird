@@ -145,10 +145,13 @@ public class GamePanel extends MenuFundament {
     public void gameoverbild() {
         ActionListener actionListener;
 
-        add(restartBut);
-        add(backToMenuBut);
-        add(scorename);
-        add(addscore);
+       this.add(restartBut);
+       this.add(backToMenuBut);
+       this.add(scorename);
+       this.add(addscore);
+
+        repaint();
+        revalidate();
 
     }
 
