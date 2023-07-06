@@ -17,10 +17,12 @@ public class SettingsList extends Observable {
     }
 
     public String getSkin(String typ) {
+
         return db.getterMethode(typ);
     }
 
     public String getBackground(String typ) {
+
         return db.getterMethode(typ);
     }
 }

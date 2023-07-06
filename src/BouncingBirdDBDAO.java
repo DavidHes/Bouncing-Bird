@@ -51,7 +51,7 @@ public class BouncingBirdDBDAO implements BouncingBirdDAO{
              ResultSet resultSet = statement.executeQuery("SELECT * FROM OOP2_SS23_G1_P1.SETTINGS")) {
             //Tabelle in resultset gespeichert.
 
-            while (resultSet.next()) {
+            while (resultSet.next()) { //--> .next gibt nur die nächste Zeile an.
                 pfad = resultSet.getString(typ);
             }
         } catch (SQLException e) {

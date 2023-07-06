@@ -30,26 +30,11 @@ public class MenuFundament extends JPanel implements Observer {
         rateGameBut = new JButton("Rate Game");
         backToMenuBut = new JButton("Back to Menu");
 
-
-
-
-        //startGameBut.addActionListener(new ButtonListener());
-        //  scoreBoardBut.addActionListener(new ButtonListener());
-        // settingsBut.addActionListener(new ButtonListener());
-        //   rateGameBut.addActionListener(new ButtonListener());
-
         startGameBut.setBounds(144, 250, 150, 50);
         scoreBoardBut.setBounds(144, 350, 150, 50);
         settingsBut.setBounds(144, 450, 150, 50);
         rateGameBut.setBounds(144, 550, 150, 50);
         backToMenuBut.setBounds(144, 650, 150, 50);
-
-        /*startGameBut.addActionListener(menuCon);
-        scoreBoardBut.addActionListener(menuCon);
-        settingsBut.addActionListener(menuCon);
-        rateGameBut.addActionListener(menuCon);
-        backToMenuBut.addActionListener(menuCon);
-         */
 
     }
 
