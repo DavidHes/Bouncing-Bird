@@ -25,17 +25,9 @@ public class GamePanel extends MenuFundament {
     String gameovertext = "Game Over";
     String clickToStartText = "Click with mouse or press Enter to Start!", clearClickToStartText = "";
 
-
-    // Timer dropTimer = new Timer(20, new MoveListener());
-    // Timer  gameOverDropTimer = new Timer(10, new GameoverListener());
-
-    Image tubeDown = new ImageIcon("/Users/uni/Desktop/tubeDown.png").getImage();
-    Image tubeup = new ImageIcon("/Users/uni/Desktop/tube.png").getImage();
-
     static String BackgroundColor;
 
     JTextField scorename ;
-
     private MouseListener mouseListener;
     private KeyListener keyListener;
 
@@ -46,9 +38,6 @@ public class GamePanel extends MenuFundament {
         this.addMouseListener(gameController);
         this.addKeyListener(gameController);
         this.setFocusable(true);
-
-        // überflüssig
-        // addController(gameController);
 
         restartBut = new JButton("Play Again");
         restartBut.setBounds(144, 250, 150, 50);
@@ -137,13 +126,6 @@ public class GamePanel extends MenuFundament {
         this.gameController = game;
         addMouseListener(gameController);
         addKeyListener(gameController);
-
-        //  if(gameover == true) {
-        //     add(restartBut);
-        //     add(addscore);
-        //    add(scorename);
-        //    add(backToMenuBut);
-        //  }
 
         setFocusable(true);
     }
@@ -245,11 +227,9 @@ public class GamePanel extends MenuFundament {
     }
 
     public void changebirdcord() {
-        //  if (clickToStartText == clearClickToStartText && gameover == false) {
 
         birdA = -8;
         System.out.println("haa");
-        // }
     }
 
     public void dropbird() {
@@ -265,7 +245,6 @@ public class GamePanel extends MenuFundament {
             tube[1] -= tubeXValocity;
         }
     }
-
 
     public void updateScore() {
         for (int i = 0; i < 2; i++) {

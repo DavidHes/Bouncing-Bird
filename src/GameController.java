@@ -4,7 +4,6 @@ import java.awt.event.*;
 public class GameController implements ActionListener, MouseListener, KeyListener {
     private GamePanel gamePanel;
 
-
     public static boolean gameStarted = false;
 
     MenuFundament menuFundament;
@@ -22,7 +21,6 @@ public class GameController implements ActionListener, MouseListener, KeyListene
     public GameController(GamePanel gamePanel) {
 
         menuFundament = new MenuFundament();
-
 
         //  rgp = new RateGamePanel(this);
         //  sbp = new ScoreboardPanel(this);

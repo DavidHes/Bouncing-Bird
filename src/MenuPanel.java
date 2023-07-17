@@ -2,13 +2,9 @@ import javax.swing.*;
 import java.awt.Graphics;
 
 public class MenuPanel extends MenuFundament {
-    RateGamePanel rgp;
-    ScoreboardPanel sbp;
-    SettingsPanel settingspanel;
-    SettingsList settingsList;
-    GamePanel gamepanel;
 
     public MenuPanel() {
+
         add(startGameBut);
         add(scoreBoardBut);
         add(rateGameBut);
