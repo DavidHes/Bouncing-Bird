@@ -1,7 +1,6 @@
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
+import java.util.Observable;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -33,7 +32,9 @@ public class GamePanel extends MenuFundament {
     Image tubeDown = new ImageIcon("/Users/uni/Desktop/tubeDown.png").getImage();
     Image tubeup = new ImageIcon("/Users/uni/Desktop/tube.png").getImage();
 
-    JTextField scorename;
+    static String BackgroundColor;
+
+    JTextField scorename ;
 
     private MouseListener mouseListener;
     private KeyListener keyListener;
@@ -47,16 +48,36 @@ public class GamePanel extends MenuFundament {
         this.setFocusable(true);
 
         // überflüssig
-       // addController(gameController);
+        // addController(gameController);
 
         restartBut = new JButton("Play Again");
         restartBut.setBounds(144, 250, 150, 50);
 
         scorename = new JTextField("Name.....");
-        scorename.setBounds(144, 350, 150, 50);
-        //add(scorename);
-        scorename.addKeyListener(gameController);
+        scorename.setBounds(144, 350, 150, 45);
+        scorename.setEditable(true);
+        scorename.setVisible(true);
+        scorename.addActionListener(actionListener);
+        add(scorename);
 
+        scorename.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                if (scorename.getText().equals("Name.....")) {
+                    scorename.setText("");
+                    scorename.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (scorename.getText().isEmpty()) {
+                    scorename.setText("Name.....");
+                    scorename.setForeground(Color.GRAY);
+                }
+            }
+
+        });
         addscore = new JButton("Add Score");
         addscore.setBounds(144, 450, 150, 50);
 
@@ -82,6 +103,7 @@ public class GamePanel extends MenuFundament {
             g.drawString(clickToStartText, 11, 400);
             spawnTube(g);
             drawbird(g);
+            scorename.setVisible(false);
             g.setColor(Color.BLACK);
             g.setFont(myFont1);
             g.drawString("" + score, 205, 100);
@@ -105,35 +127,50 @@ public class GamePanel extends MenuFundament {
             g.setColor(Color.BLACK);
             g.setFont(gameoverfont);
             g.drawString(gameovertext, 88, 200);
+
+            repaint();
         }
     }
+
 
     public void addController(GameController game) {
         this.gameController = game;
         addMouseListener(gameController);
         addKeyListener(gameController);
 
-
-      //  if(gameover == true) {
-       //     add(restartBut);
-       //     add(addscore);
+        //  if(gameover == true) {
+        //     add(restartBut);
+        //     add(addscore);
         //    add(scorename);
         //    add(backToMenuBut);
-      //  }
+        //  }
 
         setFocusable(true);
     }
 
 
     public void spawnTube(Graphics g) {
-
         for (int i = 0; i < 2; i++) {
             g.setColor(Color.RED);
             g.fillRect(tube[i], 0, tubeWidth, frameHeight);
 
-            g.setColor(new Color(41, 183, 229));
+            switch (BackgroundColor) {
+                case "Hintergrund-Stadt-Mittag.png":
+                    g.setColor(new Color(147, 225, 254));
+                    break;
+                case "Hintergrund-Stadt-Nacht.png":
+                    g.setColor(new Color(42, 89, 158));
+                    break;
+                case "Hintergrund-Stadt-Tag.png":
+                    g.setColor(new Color(41, 183, 229));
+                    break;
+                default:
+                    g.setColor(new Color(41, 183, 229));
+                    break;
+            }
             g.fillRect(tube[i], gap[i], tubeWidth, 100);
 
+            //spawnt die neuen Tubes wenn ein Tube schwindet
             if (tube[i] + tubeWidth <= 0) {
                 tube[i] = width;
                 gap[i] = (int) (Math.random() * (frameHeight - 250));
@@ -144,28 +181,28 @@ public class GamePanel extends MenuFundament {
     public void gameoverbild() {
         ActionListener actionListener;
 
-       this.add(restartBut);
-       this.add(backToMenuBut);
-       this.add(scorename);
-       this.add(addscore);
+        this.add(restartBut);
+        this.add(backToMenuBut);
+        this.add(addscore);
+        scorename.setVisible(true);
 
         repaint();
         revalidate();
-
-        requestFocusInWindow();
 
     }
 
     public void addTheScore() {
 
-     // String name = scorename.getText();
-     //vllt an der falschen Stelle
-      //addscore(score,name);
-       // scorename.repaint();
+        String name = scorename.getText();
+        //vllt an der falschen Stelle
+        //addscore(score,name);
+        scorename.setText("Name.....");
+        scorename.repaint();
 
     }
 
     public void restartTheGame() {
+
 
         clickToStartText = "Click with mouse or press Enter to Start!";
         score = 0;
@@ -177,11 +214,11 @@ public class GamePanel extends MenuFundament {
         gap [1] = (int) (Math.random() * (frameHeight - 250));
         gameover = false;
         spielmenuvisible = false;
+        scorename.setText("Name.....");
 
         remove(backToMenuBut);
         remove(restartBut);
         remove(addscore);
-        remove(scorename);
 
         setFocusable(true);
         requestFocusInWindow();
@@ -200,20 +237,19 @@ public class GamePanel extends MenuFundament {
 
         if (!(birdyPOS + birdV >= 0 && birdyPOS + birdV + 40 <= frameHeight)) {
             System.out.println(birdyPOS + " + " + frameHeight);
-         //   System.out.println("Border getroffen");
+            //   System.out.println("Border getroffen");
             gameover = true;
             spielmenuvisible = true;
             gameoverbild();
-
         }
     }
 
     public void changebirdcord() {
-      //  if (clickToStartText == clearClickToStartText && gameover == false) {
+        //  if (clickToStartText == clearClickToStartText && gameover == false) {
 
-            birdA = -8;
+        birdA = -8;
         System.out.println("haa");
-       // }
+        // }
     }
 
     public void dropbird() {
@@ -230,11 +266,6 @@ public class GamePanel extends MenuFundament {
         }
     }
 
-
-    public JButton getRestartButton() {
-
-        return restartBut;
-    }
 
     public void updateScore() {
         for (int i = 0; i < 2; i++) {
@@ -262,5 +293,10 @@ public class GamePanel extends MenuFundament {
                 }
             }
         }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        super.update(o, arg);
     }
 }

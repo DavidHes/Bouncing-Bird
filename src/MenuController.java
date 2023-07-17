@@ -33,6 +33,8 @@ public class MenuController implements ActionListener {
         menuPanel = new MenuPanel();
         gameController = new GameController(gamePanel);
 
+
+
       /*  frame.add(rateGamePanel);
         frame.add(scoreboardPanel);
         frame.add(settingsPanel);

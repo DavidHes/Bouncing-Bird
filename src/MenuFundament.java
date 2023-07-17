@@ -13,17 +13,16 @@ public class MenuFundament extends JPanel implements Observer {
     private MenuController menuCon;
 
     GameController gameController;
-    SettingsList settingsList;
 
     static Image titelBB = new ImageIcon("BouncingBirdTitel.png").getImage();
-    static Image titelBwB = new ImageIcon("Hintergrund-Stadt-Tag.png").getImage();
-    static Image grünbird = new ImageIcon("GrünB.png").getImage();
-
+    static Image titelBwB;
+    static Image grünbird;
 
     public MenuFundament() {
 
         setPreferredSize(new Dimension(frameWidth, frameHeight));
         this.setLayout(null);
+
 
         startGameBut = new JButton("Start Game");
         scoreBoardBut = new JButton("Scoreboard");
@@ -52,7 +51,7 @@ public class MenuFundament extends JPanel implements Observer {
         backToMenuBut.addActionListener(menuCon);
          */
 
-        settingsList = new SettingsList();
+
 
     }
 

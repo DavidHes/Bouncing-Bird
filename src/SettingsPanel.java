@@ -17,6 +17,10 @@ public class SettingsPanel extends MenuFundament {
         layoutComponents(actionListener);
         checkAuswahl();
 
+        titelBwB = new ImageIcon(settingsList.getBackground()).getImage();
+        grünbird = new ImageIcon(settingsList.getSkin()).getImage();
+        GamePanel.BackgroundColor = settingsList.getBackground();
+
     }
 
     private void initComponents() {
@@ -118,6 +122,10 @@ public class SettingsPanel extends MenuFundament {
                     System.out.println("Neuster Eintrag Background: " + settingsList.getBackground());
 
                     titelBwB = new ImageIcon(settingsList.getBackground()).getImage();
+                    GamePanel.BackgroundColor = settingsList.getBackground(); //Gleichzeitig muss für hier die
+                    // BackgroundColor für GamePanel festgelegt werden (für die Mitte der Tubes).
+
+
 
 
                 }
