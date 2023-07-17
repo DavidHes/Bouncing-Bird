@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
-
 import javax.swing.*;
 
 public class MenuFundament extends JPanel implements Observer {
@@ -16,7 +15,7 @@ public class MenuFundament extends JPanel implements Observer {
 
     Image titelBB = new ImageIcon("BouncingBirdTitel.png").getImage();
     Image titelBwB = new ImageIcon("Hintergrund-Stadt-Tag.png").getImage();
-    Image grünbird = new ImageIcon("GrünB.png").getImage();
+    Image bird = new ImageIcon("GrünB.png").getImage();
 
 
     public MenuFundament() {
@@ -49,18 +48,16 @@ public class MenuFundament extends JPanel implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-
-    }
-
-
-    @Override
     protected void paintComponent(Graphics g) {
         // TODO Auto-generated method stub
         super.paintComponent(g);
 
         g.drawImage(titelBwB, 0, 0, frameWidth, frameHeight, this);
         repaint();
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
 
     }
 }

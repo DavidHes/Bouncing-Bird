@@ -1,7 +1,6 @@
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
+import java.util.Observable;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -33,7 +32,7 @@ public class GamePanel extends MenuFundament {
     Image tubeDown = new ImageIcon("/Users/uni/Desktop/tubeDown.png").getImage();
     Image tubeup = new ImageIcon("/Users/uni/Desktop/tube.png").getImage();
 
-    JTextField scorename;
+    JTextField scorename ;
 
     private MouseListener mouseListener;
     private KeyListener keyListener;
@@ -53,12 +52,30 @@ public class GamePanel extends MenuFundament {
         restartBut.setBounds(144, 250, 150, 50);
 
         scorename = new JTextField("Name.....");
-        scorename.setBounds(144, 350, 150, 50);
+        scorename.setBounds(144, 350, 150, 45);
         scorename.setEditable(true);
         scorename.setVisible(true);
         scorename.addActionListener(actionListener);
+        add(scorename);
 
+        scorename.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                    if (scorename.getText().equals("Name.....")) {
+                        scorename.setText("");
+                        scorename.setForeground(Color.BLACK);
+                    }
+                }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (scorename.getText().isEmpty()) {
+                    scorename.setText("Name.....");
+                    scorename.setForeground(Color.GRAY);
+                }
+            }
 
+        });
         addscore = new JButton("Add Score");
         addscore.setBounds(144, 450, 150, 50);
 
@@ -84,6 +101,7 @@ public class GamePanel extends MenuFundament {
             g.drawString(clickToStartText, 11, 400);
             spawnTube(g);
             drawbird(g);
+            scorename.setVisible(false);
             g.setColor(Color.BLACK);
             g.setFont(myFont1);
             g.drawString("" + score, 205, 100);
@@ -107,6 +125,8 @@ public class GamePanel extends MenuFundament {
             g.setColor(Color.BLACK);
             g.setFont(gameoverfont);
             g.drawString(gameovertext, 88, 200);
+
+            repaint();
         }
     }
 
@@ -135,6 +155,7 @@ public class GamePanel extends MenuFundament {
             g.setColor(new Color(41, 183, 229));
             g.fillRect(tube[i], gap[i], tubeWidth, 100);
 
+            //spawnt die neuen Tubes wenn ein Tube schwindet
             if (tube[i] + tubeWidth <= 0) {
                 tube[i] = width;
                 gap[i] = (int) (Math.random() * (frameHeight - 250));
@@ -147,8 +168,8 @@ public class GamePanel extends MenuFundament {
 
        this.add(restartBut);
        this.add(backToMenuBut);
-       this.add(scorename);
        this.add(addscore);
+        scorename.setVisible(true);
 
         repaint();
         revalidate();
@@ -180,7 +201,6 @@ public class GamePanel extends MenuFundament {
         remove(backToMenuBut);
         remove(restartBut);
         remove(addscore);
-        remove(scorename);
 
         setFocusable(true);
         requestFocusInWindow();
@@ -191,7 +211,7 @@ public class GamePanel extends MenuFundament {
 
     public void drawbird(Graphics g) {
 
-        g.drawImage(grünbird, birdxPOS, birdyPOS + birdV, 40, 40, this);
+        g.drawImage(bird, birdxPOS, birdyPOS + birdV, 40, 40, this);
     }
 
     public void checkBorderCollusion() {
@@ -203,7 +223,6 @@ public class GamePanel extends MenuFundament {
             gameover = true;
             spielmenuvisible = true;
             gameoverbild();
-
         }
     }
 
@@ -228,10 +247,7 @@ public class GamePanel extends MenuFundament {
             tube[1] -= tubeXValocity;
         }
     }
-
-
     public JButton getRestartButton() {
-
         return restartBut;
     }
 
@@ -261,5 +277,10 @@ public class GamePanel extends MenuFundament {
                 }
             }
         }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        super.update(o, arg);
     }
 }

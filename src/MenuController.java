@@ -30,7 +30,7 @@ public class MenuController implements ActionListener {
         rgList = new RateGameList();
         sbList = new ScoreboardList();
         settList = new SettingsList();
-        menuPanel = new MenuPanel(this);
+        menuPanel = new MenuPanel();
         gameController = new GameController(gamePanel);
 
       /*  frame.add(rateGamePanel);

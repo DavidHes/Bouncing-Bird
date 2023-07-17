@@ -25,8 +25,6 @@ public class GameController implements ActionListener, MouseListener, KeyListene
     public GameController(GamePanel gamePanel) {
 
         menuFundament = new MenuFundament();
-
-
       //  rgp = new RateGamePanel(this);
       //  sbp = new ScoreboardPanel(this);
         // settingspanel = new SettingsPanel(this);
@@ -64,7 +62,6 @@ public class GameController implements ActionListener, MouseListener, KeyListene
            // System.out.println("los");
             gamePanel.checkTubeCollusion();
             gamePanel.checkBorderCollusion();
-
             gamePanel.updateScore();
             gamePanel.dropbird();
             gamePanel.movetube();
