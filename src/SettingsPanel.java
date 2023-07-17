@@ -2,31 +2,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class SettingsPanel extends MenuFundament {
 
     SettingsList settingsList = new SettingsList();
     private JButton[] birdSkinButtons;
     private JButton[] backgroundButtons;
-    private JButton applyButton;
     private JButton selectedBirdButton;
     private JButton selectedBackgroundButton;
 
     public SettingsPanel(ActionListener actionListener) {
-
         super();
-        add(backToMenuBut);
-        backToMenuBut.addActionListener(actionListener);
-
         initComponents();
-        layoutComponents();
+        layoutComponents(actionListener);
+        checkAuswahl();
 
     }
 
     private void initComponents() {
-
         birdSkinButtons = new JButton[3];
         birdSkinButtons[0] = createImageButton("Vogel-Blau.png");
         birdSkinButtons[1] = createImageButton("Vogel-Braun.png");
@@ -37,23 +30,30 @@ public class SettingsPanel extends MenuFundament {
         backgroundButtons[1] = createImageButton("Hintergrund-Stadt-Mittag.png");
         backgroundButtons[2] = createImageButton("Hintergrund-Stadt-Nacht.png");
 
-        applyButton = new JButton("Speichern");
-
     }
 
-    private void layoutComponents() {
-        setLayout(new GridLayout(0, 2)); // 0 Zeilen, 2 Spalten
+    private void layoutComponents(ActionListener actionListener) {
+        setLayout(null); // Setzen Sie das Layout auf null, um die Position der Komponenten manuell festzulegen
 
-        add(birdSkinButtons[0]);
-        add(backgroundButtons[0]);
+        int x = 50; // X-Position der Buttons
+        int y = 100; // Y-Position der Buttons
+        int buttonWidth = 100; // Breite der Buttons
+        int buttonHeight = 100; // Höhe der Buttons
+        int horizontalGap = 100; // Horizontaler Abstand zwischen den Buttons
 
-        add(birdSkinButtons[1]);
-        add(backgroundButtons[1]);
+        for (int i = 0; i < 3; i++) {
+            birdSkinButtons[i].setBounds(x, y, buttonWidth, buttonHeight);
+            backgroundButtons[i].setBounds(x + buttonWidth + horizontalGap, y, buttonWidth, buttonHeight);
 
-        add(birdSkinButtons[2]);
-        add(backgroundButtons[2]);
+            add(birdSkinButtons[i]);
+            add(backgroundButtons[i]);
 
+            y += buttonHeight + 50; // Vertikaler Abstand zwischen den Buttons
+        }
 
+        backToMenuBut.setBounds(144, 650, 150, 50); // Position des BackToMenu-Buttons
+        add(backToMenuBut);
+        backToMenuBut.addActionListener(actionListener);
     }
 
     private JButton createImageButton(String imagePath) {
@@ -71,73 +71,71 @@ public class SettingsPanel extends MenuFundament {
         return button;
     }
 
-    /*private void applyChanges() {
-        if (selectedButton != null) {
-            try {
-                FileWriter writer = new FileWriter("Settings.txt", false); //false sorgt dafür, dass die txt überschrieben wird
+    private void checkAuswahl() {
+        if(settingsList.getSkin() != null) {
+            System.out.println("nicht leer");
 
-                writer.write("Skin: " + selectedButton.getName() + "\n");
-                writer.write("Background: " + selectedButton.getName()+ "\n");
-                System.out.println("Hallo neues Bild: " + selectedButton.getName());
-                writer.close();
-
-            } catch (IOException e) {
-                System.out.println("Fehler beim Schreiben der Datei: " + e.getMessage());
-            }
-            //JOptionPane.showMessageDialog(frame, "Änderungen wurden erfolgreich gespeichert!");
+        } else {
+            System.out.println("leer");
         }
     }
 
-     */
-
     private class ImageSelectionListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            JButton clickedButton = (JButton) event.getSource();
+            JButton clickedBirdButton = (JButton) event.getSource();
+            JButton clickedBackgroundButton = (JButton) event.getSource();
 
             for (JButton birdButton : birdSkinButtons) {
-                if (birdButton == clickedButton) {
+                if (birdButton == clickedBirdButton) {
                     if (selectedBirdButton != null) {
-                            selectedBirdButton.setBorderPainted(false);
-                        }
-                        selectedBirdButton = birdButton;
-                        birdButton.setBorder(BorderFactory.createLineBorder(Color.GREEN, 20));
-                        birdButton.setBorderPainted(true);
+                        selectedBirdButton.setBorderPainted(false);
+                    }
+                    selectedBirdButton = birdButton;
+                    birdButton.setBorder(BorderFactory.createLineBorder(Color.GREEN, 5));
+                    birdButton.setBorderPainted(true);
+                    System.out.println("In Settingspanel ist folgender Button der selectedBIRDButton: " + selectedBirdButton.getName());
+                    settingsList.setSkin("VOGELSKIN", selectedBirdButton.getName());
+                    System.out.println("Neuster Eintrag Skin: " + settingsList.getSkin());
+
+                    grünbird = new ImageIcon(settingsList.getSkin()).getImage();
+
+
 
                 }
             }
 
             for (JButton backgroundButton : backgroundButtons) {
-                if (backgroundButton == clickedButton) {
-                  if (selectedBackgroundButton != null) {
-                            selectedBackgroundButton.setBorderPainted(false);
-                        }
-                        selectedBackgroundButton = backgroundButton;
-                        backgroundButton.setBorder(BorderFactory.createLineBorder(Color.GREEN, 20));
-                        backgroundButton.setBorderPainted(true);
+                if (backgroundButton == clickedBackgroundButton) {
+                    if (selectedBackgroundButton != null) {
+                        selectedBackgroundButton.setBorderPainted(false);
+                    }
+                    selectedBackgroundButton = backgroundButton;
+                    backgroundButton.setBorder(BorderFactory.createLineBorder(Color.GREEN, 5));
+
+                    backgroundButton.setBorderPainted(true);
+                    System.out.println("In Settingspanel ist folgender Button der selectedBACKGROUNDButton: " + selectedBackgroundButton.getName());
+                    settingsList.setBackground("HINTERGRUND", selectedBackgroundButton.getName());
+                    System.out.println("Neuster Eintrag Background: " + settingsList.getBackground());
+
+                    titelBwB = new ImageIcon(settingsList.getBackground()).getImage();
+
 
                 }
             }
 
-            JButton selectedButton = (JButton) event.getSource();
+          /*  JButton selectedDBBirdButton = (JButton) event.getSource();
+            if (selectedBirdButton != null) {
+                System.out.println("In Settingspanel ist folgender Button der selectedBIRDButton: " + selectedDBBirdButton.getName());
+                settingsList.setSkin("VOGELSKIN", selectedBirdButton.getName());
+                selectedDBBirdButton
 
-           // try {
-             //   FileWriter writer = new FileWriter("Settings.txt", false); //false sorgt dafür, dass die txt überschrieben wird
-
-                if (selectedBirdButton != null) {
-                    settingsList.setSkin("VOGELSKIN", selectedBirdButton.getName());
-                  //  writer.write("Skin: " + selectedBirdButton.getName() + "\n");
-                }
-
-                if (selectedBackgroundButton != null) {
-                    settingsList.setBackground("HINTERGRUND", selectedBackgroundButton.getName());
-                  //  writer.write("Background: " + selectedBackgroundButton.getName() + "\n");
-                }
-
-               // writer.close();
-
-           // } catch (IOException exception) {
-               // System.out.println("Fehler beim Schreiben der Datei: " + exception.getMessage());
-           // }
+            }
+            JButton selectedDBBackgroundButton = (JButton) event.getSource();
+            if (selectedBackgroundButton != null) {
+                System.out.println("In Settingspanel ist folgender Button der selectedBACKGROUNDButton: " + selectedDBBackgroundButton.getName());
+                settingsList.setBackground("HINTERGRUND", selectedBackgroundButton.getName());
+            }
+        }*/
         }
     }
 }

@@ -16,11 +16,11 @@ public class SettingsList extends Observable {
         db.setterMethode(typ, pfad);
     }
 
-    public String getSkin(String typ) {
-        return db.getterMethode(typ);
+    public String getSkin() {
+        return db.getterMethode("VOGELSKIN");
     }
 
-    public String getBackground(String typ) {
-        return db.getterMethode(typ);
+    public String getBackground() {
+        return db.getterMethode("HINTERGRUND");
     }
 }

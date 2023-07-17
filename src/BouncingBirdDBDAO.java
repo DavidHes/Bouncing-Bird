@@ -9,6 +9,7 @@ public class BouncingBirdDBDAO implements BouncingBirdDAO{
     private String password = "neuesPw";
     private String user = "OOP2_SS23_G1_P1";
 
+
     public BouncingBirdDBDAO() {
         try {
             ds = new OracleDataSource();
@@ -32,63 +33,47 @@ public class BouncingBirdDBDAO implements BouncingBirdDAO{
      * @param typ
      * @return
      */
-   @Override
+    @Override
     public String getterMethode(String typ) {
-        String pfad = null;
-        System.out.println("awdawdawdawd");
+        String name = null;
         try (Connection connection = ds.getConnection();
-
-             //Ist der Treiber geladen und die Verbindung hergestellt,
-             //  benötigen Sie ein Objekt der Klasse Statement zum Absetzen von SQL-Kommandos
-
              Statement statement = connection.createStatement();
-
-             //  Mit der Methode execute() des Statement-Objekts wird eine SQL-Anweisung ausgeführt
-             //  execute() erzeugt eine Ergebnismenge, die mit Hilfe eines Objekts der Klasse ResultSet ausgelesen werden kann
-             //  ResultSet rs = stm.getResultSet();  Mit Methoden des ResultSet-Objekts können Daten gelesen und Java-
-             //    Variablen zugewiesen werden.
-
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM OOP2_SS23_G1_P1.SETTINGS")) {
-            //Tabelle in resultset gespeichert.
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM OOP2_SS23_G1_P1.SETTINGS ORDER BY TIMESTAMP DESC")) {
 
             while (resultSet.next()) {
-                pfad = resultSet.getString(typ);
+                String string = resultSet.getString("COLLECTION");
+                if (string.charAt(0) == typ.charAt(0)) {
+                    name = resultSet.getString("COLLECTION");
+                    System.out.println("Folgender Hintergrund ist der aktuellste: " + name);
+                    break; // Abbrechen, wenn der gewünschte Eintrag gefunden wurde
+                } else {
+                    System.out.println("Fehler");
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return pfad;
+        return name;
     }
-
 
     @Override
     public void setterMethode(String typ, String pfad) {
         try (Connection connection = ds.getConnection()) {
-            String deleteSql = "DELETE FROM Settings WHERE " + typ + " IS NOT NULL";
-            PreparedStatement deleteStatement = connection.prepareStatement(deleteSql);
-            deleteStatement.executeUpdate();
-
-            String sql = "INSERT INTO Settings (" + typ + ") VALUES (?)";
+            String sql = "INSERT INTO SETTINGS (COLLECTION, TIMESTAMP) VALUES (?, CURRENT_TIMESTAMP)";
             PreparedStatement statement = connection.prepareStatement(sql);
-
-            // Müssen Host-Variablen in ein SQL-Statement eingefügt werden, empfiehlt sich die Verwendung eines PreparedStatement.
-            //     Dabei steht jedes ? für eine Variable, die mit setter- Methoden gesetzt werden.
-
             statement.setString(1, pfad);
-
-            // Sie schreiben Änderungen direkt in die Datenbank mit der Methode executeUpdate()
-            //der Klassen Statement oder PreparedStatement
-
             int rowsUpdated = statement.executeUpdate();
 
             if (rowsUpdated > 0) {
                 System.out.println("Erfolgreich aktualisiert");
+                SettingsList settingsList = new SettingsList();
+
+
             } else {
-                System.out.println("Fehler beim aktualisieren");
+                System.out.println("Fehler beim Aktualisieren");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
 }

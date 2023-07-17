@@ -54,10 +54,8 @@ public class GamePanel extends MenuFundament {
 
         scorename = new JTextField("Name.....");
         scorename.setBounds(144, 350, 150, 50);
-        scorename.setEditable(true);
-        scorename.setVisible(true);
-        scorename.addActionListener(actionListener);
-
+        //add(scorename);
+        scorename.addKeyListener(gameController);
 
         addscore = new JButton("Add Score");
         addscore.setBounds(144, 450, 150, 50);
@@ -115,6 +113,7 @@ public class GamePanel extends MenuFundament {
         addMouseListener(gameController);
         addKeyListener(gameController);
 
+
       //  if(gameover == true) {
        //     add(restartBut);
        //     add(addscore);
@@ -153,14 +152,16 @@ public class GamePanel extends MenuFundament {
         repaint();
         revalidate();
 
+        requestFocusInWindow();
+
     }
 
     public void addTheScore() {
 
-      String name = scorename.getText();
+     // String name = scorename.getText();
      //vllt an der falschen Stelle
       //addscore(score,name);
-        scorename.repaint();
+       // scorename.repaint();
 
     }
 
