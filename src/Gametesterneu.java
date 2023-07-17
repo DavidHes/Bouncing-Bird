@@ -15,15 +15,10 @@ public class Gametesterneu {
 
         MenuController menuController = new MenuController();
         MenuFundament menuFundament = new MenuFundament();
-        MenuPanel menuPanel = new MenuPanel(menuController);
+        MenuPanel menuPanel = new MenuPanel();
         SettingsList settingsList = new SettingsList();
 
-
         // Datenbankabfrage ausführen
-
-
-
-
 
    /* MenuFundament menuFundament = new MenuFundament();
     MenuController menuController = new MenuController();
