@@ -18,6 +18,16 @@ public class Gametesterneu {
         MenuPanel menuPanel = new MenuPanel();
         SettingsList settingsList = new SettingsList();
 
+      // NÜTZLICH!!!!!!!
+
+        //MenuFundament menuFundament = new MenuFundament();
+        //menuFundament.addObservable(
+       // SettingsPanel settingspanel = new SettingsPanel();
+      // settingsList.addObserver(settingspanel);
+
+       // ÜBERFLÜSSIG!!!!!!
+
+
         // Datenbankabfrage ausführen
 
    /* MenuFundament menuFundament = new MenuFundament();

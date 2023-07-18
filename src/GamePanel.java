@@ -121,7 +121,7 @@ public class GamePanel extends MenuFundament {
         }
     }
 
-
+//Überflüssig
     public void addController(GameController game) {
         this.gameController = game;
         addMouseListener(gameController);

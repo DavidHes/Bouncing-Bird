@@ -47,7 +47,7 @@ public class GameController implements ActionListener, MouseListener, KeyListene
 
     }
 
-
+    //Überflüssig
     public void addModel(RateGameList rgL, ScoreboardList sbL, SettingsList settL) {
         this.rgList = rgL;
         this.sbList = sbL;
@@ -62,7 +62,6 @@ public class GameController implements ActionListener, MouseListener, KeyListene
             // System.out.println("los");
             gamePanel.checkTubeCollusion();
             gamePanel.checkBorderCollusion();
-
             gamePanel.updateScore();
             gamePanel.dropbird();
             gamePanel.movetube();
@@ -81,6 +80,7 @@ public class GameController implements ActionListener, MouseListener, KeyListene
             gameStarted = false;
         }
 
+        //  Überflüssig
      /*   if (e.getSource() == gamePanel.scorename) {
             String name = gamePanel.scorename.getText();
             // Hier können Sie den eingegebenen Text verarbeiten, z.B. den Score mit dem Namen hinzufügen
@@ -92,7 +92,6 @@ public class GameController implements ActionListener, MouseListener, KeyListene
     @Override
     public void mouseClicked(MouseEvent e) {
         System.out.println("maus klickt");
-
 
         //Startet das Spiel, sobald der Spieler auf den Bildschirm mit der Maus klickt bzw. auf die Entertaste drückt
         if (gameStarted == false) {
