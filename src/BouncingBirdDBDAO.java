@@ -4,14 +4,15 @@ import java.sql.*;
 
 public class BouncingBirdDBDAO implements BouncingBirdDAO{
 
-    private static OracleDataSource ds = null;
+    OracleDsSingleton ora = OracleDsSingleton.getInstance();
+  /*  private static OracleDataSource ds = null;
     private String url = "jdbc:oracle:thin:@//10.50.205.21:1521/dbk.hwr-berlin.de";
     private String password = "neuesPw";
     private String user = "OOP2_SS23_G1_P1";
-
+*/
 
     public BouncingBirdDBDAO() {
-        try {
+     /*   try {
             ds = new OracleDataSource();
 
             ds.setDataSourceName("HWROracleDataSource");
@@ -23,7 +24,7 @@ public class BouncingBirdDBDAO implements BouncingBirdDAO{
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }
+        }*/
     }
 
     ///////////////////CLOSE FEHLT NOCH!!!!!!!!!!!!!!!
@@ -35,8 +36,9 @@ public class BouncingBirdDBDAO implements BouncingBirdDAO{
      */
     @Override
     public String getterMethode(String typ) {
+
         String name = null;
-        try (Connection connection = ds.getConnection();
+        try (Connection connection = ora.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery("SELECT * FROM OOP2_SS23_G1_P1.SETTINGS ORDER BY TIMESTAMP DESC")) {
 
@@ -58,7 +60,7 @@ public class BouncingBirdDBDAO implements BouncingBirdDAO{
 
     @Override
     public void setterMethode(String typ, String pfad) {
-        try (Connection connection = ds.getConnection()) {
+        try (Connection connection = ora.getConnection()) {
             String sql = "INSERT INTO SETTINGS (COLLECTION, TIMESTAMP) VALUES (?, CURRENT_TIMESTAMP)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, pfad);

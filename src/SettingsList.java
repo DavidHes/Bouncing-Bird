@@ -4,9 +4,7 @@ import java.util.Observable;
 public class SettingsList extends Observable {
 
     BouncingBirdDBDAO db = new BouncingBirdDBDAO();
-    public SettingsList(){
 
-    }
 
     public void setSkin(String typ, String pfad) {
         db.setterMethode(typ, pfad);

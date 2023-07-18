@@ -117,6 +117,7 @@ public class GamePanel extends MenuFundament {
             g.setFont(gameoverfont);
             g.drawString(gameovertext, 88, 200);
 
+
             repaint();
         }
     }
@@ -265,6 +266,7 @@ public class GamePanel extends MenuFundament {
                         //or under gap
                         || (birdyPOS + birdV + 40) >= gap[i] + 100 && (birdyPOS + birdV + 40) <= frameHeight) {
                     gameover = true;
+                    GameController.gameStarted = false;
                     spielmenuvisible = true;
                     System.out.println("Tube getroffen");
                     gameoverbild();
