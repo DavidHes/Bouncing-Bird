@@ -22,7 +22,10 @@ public class SettingsList extends Observable {
        // return db.getterMethode("VOGELSKIN");
     }
 
-    public String getBackground() {
-        return db.getterMethode("HINTERGRUND");
+    public void getBackground() {
+        String background = db.getterMethode("HINTERGRUND");
+        setChanged();
+        notifyObservers(background); // Übergebe den aktuellen Pfad als Argument
+        System.out.println("getbackground Methode funktioniert");
     }
 }

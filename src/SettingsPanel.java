@@ -17,11 +17,14 @@ public class SettingsPanel extends MenuFundament {
         initComponents();
         layoutComponents(actionListener);
 
-        titelBwB = new ImageIcon(settingsList.getBackground()).getImage();
+        //titelBwB = new ImageIcon(settingsList.getBackground()).getImage();
        // grünbird = new ImageIcon(settingsList.getSkin()).getImage();
-        GamePanel.BackgroundColor = settingsList.getBackground();
+
+        //GamePanel.BackgroundColor = settingsList.getBackground();
 
         settingsList.addObserver(this);
+        settingsList.getSkin();
+        settingsList.getBackground();
 
 
     }
@@ -123,11 +126,12 @@ public class SettingsPanel extends MenuFundament {
                     backgroundButton.setBorderPainted(true);
                     System.out.println("In Settingspanel ist folgender Button der selectedBACKGROUNDButton: " + selectedBackgroundButton.getName());
                     settingsList.setBackground("HINTERGRUND", selectedBackgroundButton.getName());
-                    System.out.println("Neuster Eintrag Background: " + settingsList.getBackground());
+                    //System.out.println("Neuster Eintrag Background: " + settingsList.getBackground());
 
-                    titelBwB = new ImageIcon(settingsList.getBackground()).getImage();
-                    GamePanel.BackgroundColor = settingsList.getBackground(); //Gleichzeitig muss für hier die
+                   // titelBwB = new ImageIcon(settingsList.getBackground()).getImage();
+                   // GamePanel.BackgroundColor = settingsList.getBackground(); //Gleichzeitig muss für hier die
                     // BackgroundColor für GamePanel festgelegt werden (für die Mitte der Tubes).
+                    settingsList.getBackground();
 
 
 
@@ -150,9 +154,6 @@ public class SettingsPanel extends MenuFundament {
         }*/
         }
 
-        public void update(Observable o, Object arg) {
-
-        }
 
     }
 }
