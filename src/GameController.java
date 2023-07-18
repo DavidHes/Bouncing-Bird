@@ -21,22 +21,15 @@ public class GameController implements ActionListener, MouseListener, KeyListene
     public GameController(GamePanel gamePanel) {
 
         menuFundament = new MenuFundament();
-
-        //  rgp = new RateGamePanel(this);
-        //  sbp = new ScoreboardPanel(this);
-        // settingspanel = new SettingsPanel(this);
         rgList = new RateGameList();
         sbList = new ScoreboardList();
         settList = new SettingsList();
-        // überflüssig   menuPanel = new MenuPanel();
         this.gamePanel = gamePanel;
         gamePanel.addMouseListener(this);
         gamePanel.addKeyListener(this);
 
-
         gamePanel.backToMenuBut.addActionListener(this);
         gamePanel.restartBut.addActionListener(this);
-        //gamePanel.scorename.addActionListener(this);
 
         gamePanel.setFocusable(true);
         gamePanel.requestFocusInWindow();
@@ -57,9 +50,7 @@ public class GameController implements ActionListener, MouseListener, KeyListene
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //System.out.println("gehts los?");
         if (gameStarted) {
-            // System.out.println("los");
             gamePanel.checkTubeCollusion();
             gamePanel.checkBorderCollusion();
             gamePanel.updateScore();
@@ -79,14 +70,6 @@ public class GameController implements ActionListener, MouseListener, KeyListene
             gamePanel.addTheScore();
             gameStarted = false;
         }
-
-        //  Überflüssig
-     /*   if (e.getSource() == gamePanel.scorename) {
-            String name = gamePanel.scorename.getText();
-            // Hier können Sie den eingegebenen Text verarbeiten, z.B. den Score mit dem Namen hinzufügen
-            //gamePanel.scorename.setText(""); // Optional: Das Textfeld leeren, um eine weitere Eingabe zu ermöglichen
-        }
-*/
     }
 
     @Override
@@ -98,7 +81,7 @@ public class GameController implements ActionListener, MouseListener, KeyListene
             gameStarted = true;
             gamePanel.startgame();
         }
-        if (gameStarted == true) {
+       if (gameStarted == true) {
             gamePanel.changebirdcord();
         }
     }
@@ -125,18 +108,15 @@ public class GameController implements ActionListener, MouseListener, KeyListene
         System.out.println("Maus wurde exit");
     }
 
+
     @Override
     public void keyTyped(KeyEvent e) {
-        // ...
-
-        // Prüfen, ob die Eingabe im "TEST" JTextField erfolgt
-        if (e.getSource() == gamePanel.scorename) {
-            // Ihren gewünschten Code ausführen, wenn im "TEST" JTextField getippt wird
-            // ...
-            System.out.println("Tastur schreiben");
-        }
     }
 
+    /**
+     * In dieser
+     * @param e the event to be processed
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         System.out.println("Tastendruck");
@@ -144,6 +124,7 @@ public class GameController implements ActionListener, MouseListener, KeyListene
             System.out.println("Game startet");
             // Starte das Spiel, wenn der Benutzer die Eingabetaste drückt
             gameStarted = true;
+          //  gamePanel.gameOver = false;
             gamePanel.startgame();
         }
         if (e.getKeyCode() == KeyEvent.VK_SPACE && gameStarted == true) {

@@ -33,13 +33,6 @@ public class MenuController implements ActionListener {
         menuPanel = new MenuPanel();
         gameController = new GameController(gamePanel);
 
-
-
-      /*  frame.add(rateGamePanel);
-        frame.add(scoreboardPanel);
-        frame.add(settingsPanel);
-        frame.add(gamePanel);*/
-//GEHT NICHT. MAN KANN NICHT ALLE AUFEINMAL HINZUFÜGEN
         frame.add(menuPanel);
         menuPanel.addController(this);
         frame.pack();

@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
 
 public class SettingsPanel extends MenuFundament {
 
@@ -15,11 +16,13 @@ public class SettingsPanel extends MenuFundament {
         super();
         initComponents();
         layoutComponents(actionListener);
-        checkAuswahl();
 
         titelBwB = new ImageIcon(settingsList.getBackground()).getImage();
-        grünbird = new ImageIcon(settingsList.getSkin()).getImage();
+       // grünbird = new ImageIcon(settingsList.getSkin()).getImage();
         GamePanel.BackgroundColor = settingsList.getBackground();
+
+        settingsList.addObserver(this);
+
 
     }
 
@@ -75,7 +78,7 @@ public class SettingsPanel extends MenuFundament {
         return button;
     }
 
-    private void checkAuswahl() {
+   /* private void checkAuswahl() {
         if(settingsList.getSkin() != null) {
             System.out.println("nicht leer");
 
@@ -83,7 +86,7 @@ public class SettingsPanel extends MenuFundament {
             System.out.println("leer");
         }
     }
-
+*/
     private class ImageSelectionListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             JButton clickedBirdButton = (JButton) event.getSource();
@@ -99,9 +102,10 @@ public class SettingsPanel extends MenuFundament {
                     birdButton.setBorderPainted(true);
                     System.out.println("In Settingspanel ist folgender Button der selectedBIRDButton: " + selectedBirdButton.getName());
                     settingsList.setSkin("VOGELSKIN", selectedBirdButton.getName());
-                    System.out.println("Neuster Eintrag Skin: " + settingsList.getSkin());
+                    //System.out.println("Neuster Eintrag Skin: " + settingsList.getSkin());
 
-                    grünbird = new ImageIcon(settingsList.getSkin()).getImage();
+                   // grünbird = new ImageIcon(settingsList.getSkin()).getImage();
+                    settingsList.getSkin();
 
 
 
@@ -145,6 +149,11 @@ public class SettingsPanel extends MenuFundament {
             }
         }*/
         }
+
+        public void update(Observable o, Object arg) {
+
+        }
+
     }
 }
 

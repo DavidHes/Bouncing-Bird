@@ -11,12 +11,14 @@ public class MenuFundament extends JPanel implements Observer {
     JButton startGameBut, scoreBoardBut, settingsBut , rateGameBut, backToMenuBut;
     final int frameWidth = 435, frameHeight = 750;
     private MenuController menuCon;
+    static String aktuellesterPfad = null;
 
     GameController gameController;
 
     static Image titelBB = new ImageIcon("BouncingBirdTitel.png").getImage();
     static Image titelBwB;
-    static Image grünbird;
+    static Image grünbird = new ImageIcon("Vogel-Grün.png").getImage();
+
 
     public MenuFundament() {
 
@@ -50,6 +52,13 @@ public class MenuFundament extends JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+        if (arg != null) {
+            aktuellesterPfad = arg.toString();
+            System.out.println("test: " + aktuellesterPfad);
+            grünbird = new ImageIcon(aktuellesterPfad).getImage();
+        } else {
+            System.out.println("gehhhhhhht net");
+        }
 
     }
 

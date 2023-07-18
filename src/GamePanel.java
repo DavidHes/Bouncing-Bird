@@ -19,7 +19,9 @@ public class GamePanel extends MenuFundament {
     private Font gameoverfont = new Font("Serif", Font.BOLD, 52);
 
     JButton restartBut, addscore;
-    boolean spielmenuvisible = false, gameover = false;
+    static boolean spielmenuvisible = false;
+    static boolean gameOver = false;
+
     private boolean hasExecuted = false;
 
     String gameovertext = "Game Over";
@@ -86,7 +88,7 @@ public class GamePanel extends MenuFundament {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        if (gameover == false) {
+        if (gameOver == false) {
             g.setColor(Color.BLACK);
             g.setFont(myFont);
             g.drawString(clickToStartText, 11, 400);
@@ -112,7 +114,7 @@ public class GamePanel extends MenuFundament {
             repaint();
         }
 
-        if(gameover == true){
+        if(gameOver == true){
             g.setColor(Color.BLACK);
             g.setFont(gameoverfont);
             g.drawString(gameovertext, 88, 200);
@@ -195,7 +197,7 @@ public class GamePanel extends MenuFundament {
         tube [1] = width + width/2;
         gap [0] = (int) (Math.random() * (frameHeight - 250));
         gap [1] = (int) (Math.random() * (frameHeight - 250));
-        gameover = false;
+        gameOver = false;
         spielmenuvisible = false;
         scorename.setText("Name.....");
 
@@ -221,7 +223,7 @@ public class GamePanel extends MenuFundament {
         if (!(birdyPOS + birdV >= 0 && birdyPOS + birdV + 40 <= frameHeight)) {
             System.out.println(birdyPOS + " + " + frameHeight);
             //   System.out.println("Border getroffen");
-            gameover = true;
+            gameOver = true;
             spielmenuvisible = true;
             gameoverbild();
         }
@@ -234,14 +236,14 @@ public class GamePanel extends MenuFundament {
     }
 
     public void dropbird() {
-        if (clickToStartText == clearClickToStartText && gameover == false) {
+        if (clickToStartText == clearClickToStartText && gameOver == false) {
             birdA += birdI;
             birdV += birdA;
         }
     }
 
     public void movetube() {
-        if (clickToStartText == clearClickToStartText && gameover == false) {
+        if (clickToStartText == clearClickToStartText && gameOver == false) {
             tube[0] -= tubeXValocity;
             tube[1] -= tubeXValocity;
         }
@@ -265,7 +267,7 @@ public class GamePanel extends MenuFundament {
                 if ((birdyPOS + birdV) >= 0 && (birdyPOS + birdV) <= gap[i]
                         //or under gap
                         || (birdyPOS + birdV + 40) >= gap[i] + 100 && (birdyPOS + birdV + 40) <= frameHeight) {
-                    gameover = true;
+                    gameOver = true;
                     GameController.gameStarted = false;
                     spielmenuvisible = true;
                     System.out.println("Tube getroffen");

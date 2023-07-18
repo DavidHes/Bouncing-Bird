@@ -14,8 +14,12 @@ public class SettingsList extends Observable {
         db.setterMethode(typ, pfad);
     }
 
-    public String getSkin() {
-        return db.getterMethode("VOGELSKIN");
+    public void getSkin() {
+        String skin = db.getterMethode("VOGELSKIN");
+        setChanged();
+        notifyObservers(skin); // Übergebe den aktuellen Pfad als Argument
+        System.out.println("getskin Methode funktioniert");
+       // return db.getterMethode("VOGELSKIN");
     }
 
     public String getBackground() {

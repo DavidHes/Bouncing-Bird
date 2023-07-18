@@ -37,10 +37,14 @@ public class BouncingBirdDBDAO implements BouncingBirdDAO{
     @Override
     public String getterMethode(String typ) {
 
+        Statement statement = null;
+        ResultSet resultSet = null;
+
         String name = null;
-        try (Connection connection = ora.getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM OOP2_SS23_G1_P1.SETTINGS ORDER BY TIMESTAMP DESC")) {
+        try {
+            Connection connection = ora.getConnection();
+             statement = connection.createStatement();
+             resultSet = statement.executeQuery("SELECT * FROM OOP2_SS23_G1_P1.SETTINGS ORDER BY TIMESTAMP DESC");
 
             while (resultSet.next()) {
                 String string = resultSet.getString("COLLECTION");
@@ -54,15 +58,43 @@ public class BouncingBirdDBDAO implements BouncingBirdDAO{
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (ora.getConnection() != null) {
+                    ora.getConnection().close();
+                    System.out.println("Die Connection wurde geschlossen");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                if(statement.getConnection() != null) {
+                    statement.close();
+                    System.out.println("Das Statement wurde geschlossen");
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                if(resultSet != null) {
+                    resultSet.close();
+                    System.out.println("Das ResultSet wurde geschlossen");
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            return name;
         }
-        return name;
     }
 
     @Override
     public void setterMethode(String typ, String pfad) {
+
+        PreparedStatement statement = null;
+
         try (Connection connection = ora.getConnection()) {
             String sql = "INSERT INTO SETTINGS (COLLECTION, TIMESTAMP) VALUES (?, CURRENT_TIMESTAMP)";
-            PreparedStatement statement = connection.prepareStatement(sql);
+            statement = connection.prepareStatement(sql);
             statement.setString(1, pfad);
             int rowsUpdated = statement.executeUpdate();
 
@@ -70,12 +102,21 @@ public class BouncingBirdDBDAO implements BouncingBirdDAO{
                 System.out.println("Erfolgreich aktualisiert");
                 SettingsList settingsList = new SettingsList();
 
-
             } else {
                 System.out.println("Fehler beim Aktualisieren");
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (ora.getConnection() != null) {
+                    ora.getConnection().close();
+                    System.out.println("Die Connection wurde geschlossen");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+
+            }
         }
     }
 }
