@@ -30,15 +30,14 @@ public class MenuController implements ActionListener {
         rgList = new RateGameList();
         sbList = new ScoreboardList();
         settList = new SettingsList();
-        menuPanel = new MenuPanel();
+        menuPanel = new MenuPanel(this);
         gameController = new GameController(gamePanel);
 
         frame.add(menuPanel);
-        menuPanel.addController(this);
+       // menuPanel.addController(this);
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-
     }
 
     @Override

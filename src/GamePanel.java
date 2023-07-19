@@ -32,7 +32,6 @@ public class GamePanel extends MenuBasis {
     private MouseListener mouseListener;
     private KeyListener keyListener;
 
-
     public GamePanel(GameController gameController, ActionListener actionListener) {
         super();
         this.gameController = gameController;
@@ -117,7 +116,6 @@ public class GamePanel extends MenuBasis {
             g.setColor(Color.BLACK);
             g.setFont(gameoverfont);
             g.drawString(gameovertext, 88, 200);
-
 
             repaint();
         }
@@ -229,7 +227,6 @@ public class GamePanel extends MenuBasis {
     }
 
     public void changebirdcord() {
-
         birdA = -8;
         System.out.println("haa");
     }

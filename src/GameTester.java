@@ -9,7 +9,7 @@ public class GameTester {
         SettingsPanel settingspanel = new SettingsPanel(menuController);
         settingsList.addObserver(menuBasis);
 
-        MenuPanel menuPanel = new MenuPanel();
+        MenuPanel menuPanel = new MenuPanel(menuController);
 
 
         // MenuFundament menuFundament = new MenuFundament();

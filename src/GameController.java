@@ -37,7 +37,6 @@ public class GameController implements ActionListener, MouseListener, KeyListene
         time = new Timer(40, this::actionPerformed);
         time.start();
 
-
     }
 
     //Überflüssig
