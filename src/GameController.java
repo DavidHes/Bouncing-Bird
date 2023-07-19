@@ -3,9 +3,7 @@ import java.awt.event.*;
 
 public class GameController implements ActionListener, MouseListener, KeyListener {
     private GamePanel gamePanel;
-
     public static boolean gameStarted = false;
-
     MenuBasis menuBasis;
     RateGameList rateGameList;
     ScoreboardList scoreboardList;

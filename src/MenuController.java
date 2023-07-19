@@ -34,7 +34,7 @@ public class MenuController implements ActionListener {
         gameController = new GameController(gamePanel);
 
         frame.add(menuPanel);
-       // menuPanel.addController(this);
+        menuPanel.addController(this);
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -70,6 +70,10 @@ public class MenuController implements ActionListener {
         currentPanel = jPanel;
         frame.getContentPane().add(currentPanel);
         jPanel.requestFocusInWindow();
+      //  When you make changes to the components within a container (such as adding or removing components),
+        // you need to notify the container to revalidate its layout.
+        // This is necessary to ensure that the components are properly positioned
+        //  and sized according to the updated layout rules.
         frame.revalidate();
         frame.repaint();
     }

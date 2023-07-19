@@ -12,20 +12,19 @@ public class MenuBasis extends JPanel implements Observer {
     private MenuController menuCon;
     static String aktuellerSkin = null;
     static String aktuellerBG = null;
-
     GameController gameController;
-
     static Image menuTitle = new ImageIcon("BouncingBirdTitel.png").getImage();
     static Image background;
     static Image bird;
-
 
     public MenuBasis() {
 
         setPreferredSize(new Dimension(frameWidth, frameHeight));
         this.setLayout(null);
 
-
+        /**
+         * Hier werden die Buttons initialisiert und deren Position festgelegt.
+         */
         startGameBut = new JButton("Start Game");
         scoreBoardBut = new JButton("Scoreboard");
         settingsBut = new JButton("Settings");
@@ -37,9 +36,7 @@ public class MenuBasis extends JPanel implements Observer {
         settingsBut.setBounds(144, 450, 150, 50);
         rateGameBut.setBounds(144, 550, 150, 50);
         backToMenuBut.setBounds(144, 650, 150, 50);
-
     }
-
     public void addController(MenuController menuCon) {
         this.menuCon = menuCon;
         rateGameBut.addActionListener(menuCon);
@@ -50,6 +47,12 @@ public class MenuBasis extends JPanel implements Observer {
 
     }
 
+    /**
+     * Nimmt die Daten von der Methode notifyObservers (von den Model Klassen) auf und speichert die in die Klasse.
+     * @param o     the observable object.
+     * @param arg   an argument passed to the {@code notifyObservers}
+     *                 method.
+     */
     @Override
     public void update(Observable o, Object arg) {
         if (arg != null) {
@@ -70,6 +73,10 @@ public class MenuBasis extends JPanel implements Observer {
 
     }
 
+    /**
+     * Bemalt den Hintergrund aller Panels mit dem Image backgroudn
+     * @param g the <code>Graphics</code> object to protect
+     */
 
     @Override
     protected void paintComponent(Graphics g) {
