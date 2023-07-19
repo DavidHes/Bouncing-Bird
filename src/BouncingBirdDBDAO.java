@@ -49,6 +49,10 @@ public class BouncingBirdDBDAO implements BouncingBirdDAO{
                 String string = resultSet.getString("COLLECTION");
                 if (string.charAt(0) == typ.charAt(0)) {
                     name = resultSet.getString("COLLECTION");
+
+                    resultSet.close();
+                    statement.close();
+                    connection.close();
                    // System.out.println("Folgender Hintergrund ist der aktuellste: " + name);
                     break; // Abbrechen, wenn der gewünschte Eintrag gefunden wurde
                 } else {
@@ -57,33 +61,9 @@ public class BouncingBirdDBDAO implements BouncingBirdDAO{
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (ora.getConnection() != null) {
-                    ora.getConnection().close();
-                 //   System.out.println("Die Connection wurde geschlossen");
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            try {
-                if(statement.getConnection() != null) {
-                    statement.close();
-               //     System.out.println("Das Statement wurde geschlossen");
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            try {
-                if(resultSet != null) {
-                    resultSet.close();
-                 //   System.out.println("Das ResultSet wurde geschlossen");
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            return name;
         }
+            return name;
+
     }
 
 
@@ -96,27 +76,10 @@ public class BouncingBirdDBDAO implements BouncingBirdDAO{
             String sql = "INSERT INTO SETTINGS (COLLECTION, TIMESTAMP) VALUES (?, CURRENT_TIMESTAMP)";
             statement = connection.prepareStatement(sql);
             statement.setString(1, pfad);
-            int rowsUpdated = statement.executeUpdate();
+            statement.executeUpdate();
 
-            if (rowsUpdated > 0) {
-              //  System.out.println("Erfolgreich aktualisiert");
-                SettingsList settingsList = new SettingsList();
-
-            } else {
-           //     System.out.println("Fehler beim Aktualisieren");
-            }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (ora.getConnection() != null) {
-                    ora.getConnection().close();
-                  //  System.out.println("Die Connection wurde geschlossen");
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-
-            }
         }
     }
 
@@ -143,37 +106,12 @@ public class BouncingBirdDBDAO implements BouncingBirdDAO{
                 scoreList.add(userscore);
 
                 break;
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (ora.getConnection() != null) {
-                    ora.getConnection().close();
-                    //System.out.println("Die Connection wurde geschlossen");
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            try {
-                if(statement.getConnection() != null) {
-                    statement.close();
-                    //     System.out.println("Das Statement wurde geschlossen");
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            try {
-                if(resultSet != null) {
-                    resultSet.close();
-                    //   System.out.println("Das ResultSet wurde geschlossen");
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            return scoreList;
         }
+            return scoreList;
+
     }
 
     @Override
@@ -187,27 +125,10 @@ public class BouncingBirdDBDAO implements BouncingBirdDAO{
             statement.setString(2, name);
             statement.setInt(1, score);
 
-            int rowsUpdated = statement.executeUpdate();
+            statement.executeUpdate();
 
-            if (rowsUpdated > 0) {
-                //  System.out.println("Erfolgreich aktualisiert");
-
-
-            } else {
-                //     System.out.println("Fehler beim Aktualisieren");
-            }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (ora.getConnection() != null) {
-                    ora.getConnection().close();
-                    //  System.out.println("Die Connection wurde geschlossen");
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-
-            }
         }
     }
 }

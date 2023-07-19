@@ -6,24 +6,25 @@ public class GameController implements ActionListener, MouseListener, KeyListene
 
     public static boolean gameStarted = false;
 
-    MenuBasis menuBasis;
+
 
     //überföüssig
-    RateGamePanel rgp;
+  /*  RateGamePanel rgp;
     ScoreboardPanel sbp;
     SettingsPanel settingspanel;
-    MenuPanel menuPanel;
-    RateGameList rgList;
-    ScoreboardList sbList;
-    SettingsList settList;
+    MenuPanel menuPanel;*/
+    MenuBasis menuBasis;
+    RateGameList rateGameList;
+    ScoreboardList scoreboardList;
+    SettingsList settingsList;
     Timer time;
 
     public GameController(GamePanel gamePanel) {
 
         menuBasis = new MenuBasis();
-        rgList = new RateGameList();
-        sbList = new ScoreboardList();
-        settList = new SettingsList();
+        rateGameList = new RateGameList();
+        scoreboardList = new ScoreboardList();
+        settingsList = new SettingsList();
         this.gamePanel = gamePanel;
         gamePanel.addMouseListener(this);
         gamePanel.addKeyListener(this);
@@ -41,9 +42,9 @@ public class GameController implements ActionListener, MouseListener, KeyListene
 
     //Überflüssig
     public void addModel(RateGameList rgL, ScoreboardList sbL, SettingsList settL) {
-        this.rgList = rgL;
-        this.sbList = sbL;
-        this.settList = settL;
+        this.rateGameList = rgL;
+        this.scoreboardList = sbL;
+        this.settingsList = settL;
     }
 
 
@@ -53,8 +54,8 @@ public class GameController implements ActionListener, MouseListener, KeyListene
             gamePanel.checkTubeCollusion();
             gamePanel.checkBorderCollusion();
             gamePanel.updateScore();
-            gamePanel.dropbird();
-            gamePanel.movetube();
+            gamePanel.dropBird();
+            gamePanel.moveTube();
 
         }
 
@@ -64,7 +65,7 @@ public class GameController implements ActionListener, MouseListener, KeyListene
             gameStarted = false;
         }
 
-        if (e.getSource() == gamePanel.addscore) {
+        if (e.getSource() == gamePanel.addScore) {
             System.out.println("haaaaaaä");
             gamePanel.addTheScore();
             gameStarted = false;
@@ -81,7 +82,7 @@ public class GameController implements ActionListener, MouseListener, KeyListene
             gamePanel.startgame();
         }
        if (gameStarted == true) {
-            gamePanel.changebirdcord();
+            gamePanel.changeBirdCord();
         }
     }
 
@@ -128,7 +129,7 @@ public class GameController implements ActionListener, MouseListener, KeyListene
         }
         if (e.getKeyCode() == KeyEvent.VK_SPACE && gameStarted == true) {
             System.out.println("Game läuft");
-            gamePanel.changebirdcord();
+            gamePanel.changeBirdCord();
         }
     }
 
