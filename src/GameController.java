@@ -6,7 +6,7 @@ public class GameController implements ActionListener, MouseListener, KeyListene
 
     public static boolean gameStarted = false;
 
-    MenuFundament menuFundament;
+    MenuBasis menuBasis;
 
     //überföüssig
     RateGamePanel rgp;
@@ -20,7 +20,7 @@ public class GameController implements ActionListener, MouseListener, KeyListene
 
     public GameController(GamePanel gamePanel) {
 
-        menuFundament = new MenuFundament();
+        menuBasis = new MenuBasis();
         rgList = new RateGameList();
         sbList = new ScoreboardList();
         settList = new SettingsList();

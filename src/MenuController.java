@@ -4,8 +4,8 @@ import java.awt.event.ActionListener;
 
 public class MenuController implements ActionListener {
 
-    JFrame frame;
-    MenuFundament menuFundament;
+    JFrame frame; //Damit man frame.add direkt hier ein panelwechsel machen kann
+    MenuBasis menuBasis;
     RateGamePanel rateGamePanel;
     ScoreboardPanel scoreboardPanel;
     SettingsPanel settingsPanel;
@@ -22,7 +22,7 @@ public class MenuController implements ActionListener {
 
         frame = new JFrame();
 
-        menuFundament = new MenuFundament();
+        menuBasis = new MenuBasis();
         rateGamePanel = new RateGamePanel(this);
         scoreboardPanel = new ScoreboardPanel(this);
         settingsPanel = new SettingsPanel(this);
@@ -46,31 +46,27 @@ public class MenuController implements ActionListener {
         String buttonLabel = ((JButton) e.getSource()).getText();
 
         if (buttonLabel.equals("Start Game")) {
-            showPanel(gamePanel, "Infos zu Start Game");
+            showPanel(gamePanel);
         } else if (buttonLabel.equals("Scoreboard")) {
-            showPanel(scoreboardPanel, "Infos zu Scoreboard");
+            showPanel(scoreboardPanel);
         } else if (buttonLabel.equals("Settings")) {
-            showPanel(settingsPanel, "Infos zu Settings");
+            showPanel(settingsPanel);
         } else if (buttonLabel.equals("Rate Game")) {
-            showPanel(rateGamePanel, "Infos zu Rate Game");
+            showPanel(rateGamePanel);
         } else if (buttonLabel.equals("Back to Menu")) {
             if (currentPanel == gamePanel) {
                 gamePanel.restartTheGame();
                 GameController.gameStarted = false;
             }
-            showPanel(menuPanel, "Back to menu");
+            showPanel(menuPanel);
         }
     }
 
-    private void showPanel(JPanel jPanel, String info) {
+    private void showPanel(JPanel jPanel) {
         frame.getContentPane().removeAll();
         currentPanel = jPanel;
         frame.getContentPane().add(currentPanel);
         jPanel.requestFocusInWindow();
-      //  When you make changes to the components within a container (such as adding or removing components),
-        // you need to notify the container to revalidate its layout.
-        // This is necessary to ensure that the components are properly positioned
-        //  and sized according to the updated layout rules.
         frame.revalidate();
         frame.repaint();
     }

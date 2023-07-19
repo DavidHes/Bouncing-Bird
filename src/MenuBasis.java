@@ -1,14 +1,12 @@
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.*;
 
-public class MenuFundament extends JPanel implements Observer {
+public class MenuBasis extends JPanel implements Observer {
     JButton startGameBut, scoreBoardBut, settingsBut , rateGameBut, backToMenuBut;
     final int frameWidth = 435, frameHeight = 750;
     private MenuController menuCon;
@@ -22,7 +20,7 @@ public class MenuFundament extends JPanel implements Observer {
     static Image grünbird; //= new ImageIcon(aktuellesterPfad).getImage();
 
 
-    public MenuFundament() {
+    public MenuBasis() {
 
         setPreferredSize(new Dimension(frameWidth, frameHeight));
         this.setLayout(null);

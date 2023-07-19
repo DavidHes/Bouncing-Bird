@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class ScoreboardPanel extends MenuFundament {
+public class ScoreboardPanel extends MenuBasis {
 
     static JLabel scoreLabel = new JLabel("testttt");
 

@@ -1,11 +1,10 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Observable;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-public class GamePanel extends MenuFundament {
+public class GamePanel extends MenuBasis {
     int score = 0;
     int birdxPOS = 75, birdyPOS = 300;
     int birdV = 0, birdA = 8, birdI = 1; //birdA = Beschleunigung, birdV = Geschwidnigkeit

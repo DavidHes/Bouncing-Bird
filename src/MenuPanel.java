@@ -1,7 +1,6 @@
-import javax.swing.*;
 import java.awt.Graphics;
 
-public class MenuPanel extends MenuFundament {
+public class MenuPanel extends MenuBasis {
 
     public MenuPanel() {
 

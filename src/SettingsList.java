@@ -17,9 +17,7 @@ public class SettingsList extends Observable {
     public void getSkin() {
         String skin = db.getterMethode("VOGELSKIN");
         setChanged();
-        notifyObservers(skin); // Übergebe den aktuellen Pfad als Argument
-        System.out.println("getskin Methode funktioniert");
-       // return db.getterMethode("VOGELSKIN");
+        notifyObservers(skin);
     }
 
     public void getBackground() {

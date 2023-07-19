@@ -1,6 +1,6 @@
 import java.awt.event.ActionListener;
 
-public class RateGamePanel extends MenuFundament {
+public class RateGamePanel extends MenuBasis {
 
     public RateGamePanel(ActionListener actionListener) {
         add(backToMenuBut);

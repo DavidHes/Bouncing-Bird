@@ -2,9 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Observable;
 
-public class SettingsPanel extends MenuFundament {
+public class SettingsPanel extends MenuBasis {
 
     SettingsList settingsList = new SettingsList();
     private JButton[] birdSkinButtons;
@@ -12,16 +11,17 @@ public class SettingsPanel extends MenuFundament {
     private JButton selectedBirdButton;
     private JButton selectedBackgroundButton;
 
+    /**
+     * Der Konstruktor der Klasse ruft die beiden Hauptmethoden auf und sorgt durch den Aufruf der Klasse SettingsList
+     * dafür, dass immer der aktuelleste Skin und Background angezeigt wird.
+     * @param actionListener
+     */
     public SettingsPanel(ActionListener actionListener) {
         super();
         initComponents();
         layoutComponents(actionListener);
 
-        //titelBwB = new ImageIcon(settingsList.getBackground()).getImage();
-       // grünbird = new ImageIcon(settingsList.getSkin()).getImage();
-
-        //GamePanel.BackgroundColor = settingsList.getBackground();
-
+        //SettingsPanel wird als Beobachter für die SettingsList registriert
         settingsList.addObserver(this);
         settingsList.getSkin();
         settingsList.getBackground();
@@ -29,6 +29,10 @@ public class SettingsPanel extends MenuFundament {
 
     }
 
+    /**
+     * Die private Methode initComponents erzeugt zwei Arrays vom Typ JButton.
+     * Durch die Hilfsmethode createImageButton wird jeder dieser sechs Buttons initialisiert
+     */
     private void initComponents() {
         birdSkinButtons = new JButton[3];
         birdSkinButtons[0] = createImageButton("Vogel-Blau.png");
@@ -42,14 +46,19 @@ public class SettingsPanel extends MenuFundament {
 
     }
 
+    /** Diese private Methode ist für die Positionsfestsetzung der sechs Buttons sowie für die Positionsfestsetzung
+     *  des Back-to-Menu-Buttons
+     *
+     * @param actionListener
+     */
     private void layoutComponents(ActionListener actionListener) {
-        setLayout(null); // Setzen Sie das Layout auf null, um die Position der Komponenten manuell festzulegen
+        setLayout(null); // Setzen des Layouts auf null, um die Position der Komponenten manuell festzulegen
 
         int x = 50; // X-Position der Buttons
         int y = 100; // Y-Position der Buttons
         int buttonWidth = 100; // Breite der Buttons
         int buttonHeight = 100; // Höhe der Buttons
-        int horizontalGap = 100; // Horizontaler Abstand zwischen den Buttons
+        int horizontalGap = 125; // Horizontaler Abstand zwischen den Skin- und Backgroundbuttons
 
         for (int i = 0; i < 3; i++) {
             birdSkinButtons[i].setBounds(x, y, buttonWidth, buttonHeight);
@@ -58,7 +67,7 @@ public class SettingsPanel extends MenuFundament {
             add(birdSkinButtons[i]);
             add(backgroundButtons[i]);
 
-            y += buttonHeight + 50; // Vertikaler Abstand zwischen den Buttons
+            y += buttonHeight + 50; // Vertikaler Abstand zwischen den Buttons beträgt 50
         }
 
         backToMenuBut.setBounds(144, 650, 150, 50); // Position des BackToMenu-Buttons
@@ -66,30 +75,26 @@ public class SettingsPanel extends MenuFundament {
         backToMenuBut.addActionListener(actionListener);
     }
 
-    private JButton createImageButton(String imagePath) {
-        ImageIcon imageIcon = new ImageIcon(imagePath);
-        Image image = imageIcon.getImage();
+    /**
+     * Die private Methode createImageButton ist eine Hilfsmethode zum initialisieren der sechs Buttons
+     * @param imageName ist der Name des Bildes bzw. des Buttons
+     * @return der fertig initialisierte Button wird zurückgegeben
+     */
+    private JButton createImageButton(String imageName) {
+        Image image = new ImageIcon(imageName).getImage();
         Image scaledImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
+
         JButton button = new JButton(scaledIcon);
+
         button.setBorderPainted(false);
-        button.setFocusPainted(false);
-        button.setContentAreaFilled(false);
-        button.setName(imagePath);
+        button.setContentAreaFilled(false); //Füllt den Buttonhintergrund mit der jeweiligen Backgroundfarbe
+        button.setName(imageName);
 
         button.addActionListener(new ImageSelectionListener());
         return button;
     }
 
-   /* private void checkAuswahl() {
-        if(settingsList.getSkin() != null) {
-            System.out.println("nicht leer");
-
-        } else {
-            System.out.println("leer");
-        }
-    }
-*/
     private class ImageSelectionListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             JButton clickedBirdButton = (JButton) event.getSource();
@@ -98,19 +103,14 @@ public class SettingsPanel extends MenuFundament {
             for (JButton birdButton : birdSkinButtons) {
                 if (birdButton == clickedBirdButton) {
                     if (selectedBirdButton != null) {
-                        selectedBirdButton.setBorderPainted(false);
+                        selectedBirdButton.setBorderPainted(false); //Vorherige grüne Umrandung verschwindet
                     }
                     selectedBirdButton = birdButton;
                     birdButton.setBorder(BorderFactory.createLineBorder(Color.GREEN, 5));
                     birdButton.setBorderPainted(true);
-                    System.out.println("In Settingspanel ist folgender Button der selectedBIRDButton: " + selectedBirdButton.getName());
                     settingsList.setSkin("VOGELSKIN", selectedBirdButton.getName());
-                    //System.out.println("Neuster Eintrag Skin: " + settingsList.getSkin());
 
-                   // grünbird = new ImageIcon(settingsList.getSkin()).getImage();
                     settingsList.getSkin();
-
-
 
                 }
             }
@@ -126,35 +126,12 @@ public class SettingsPanel extends MenuFundament {
                     backgroundButton.setBorderPainted(true);
                     System.out.println("In Settingspanel ist folgender Button der selectedBACKGROUNDButton: " + selectedBackgroundButton.getName());
                     settingsList.setBackground("HINTERGRUND", selectedBackgroundButton.getName());
-                    //System.out.println("Neuster Eintrag Background: " + settingsList.getBackground());
 
-                   // titelBwB = new ImageIcon(settingsList.getBackground()).getImage();
-                   // GamePanel.BackgroundColor = settingsList.getBackground(); //Gleichzeitig muss für hier die
-                    // BackgroundColor für GamePanel festgelegt werden (für die Mitte der Tubes).
                     settingsList.getBackground();
-
-
-
 
                 }
             }
-
-          /*  JButton selectedDBBirdButton = (JButton) event.getSource();
-            if (selectedBirdButton != null) {
-                System.out.println("In Settingspanel ist folgender Button der selectedBIRDButton: " + selectedDBBirdButton.getName());
-                settingsList.setSkin("VOGELSKIN", selectedBirdButton.getName());
-                selectedDBBirdButton
-
-            }
-            JButton selectedDBBackgroundButton = (JButton) event.getSource();
-            if (selectedBackgroundButton != null) {
-                System.out.println("In Settingspanel ist folgender Button der selectedBACKGROUNDButton: " + selectedDBBackgroundButton.getName());
-                settingsList.setBackground("HINTERGRUND", selectedBackgroundButton.getName());
-            }
-        }*/
         }
-
-
     }
 }
 
