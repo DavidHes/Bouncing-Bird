@@ -213,7 +213,7 @@ public class GamePanel extends MenuBasis {
 
     public void drawbird(Graphics g) {
 
-        g.drawImage(grünbird, birdXpos, birdYpos + birdV, 40, 40, this);
+        g.drawImage(bird, birdXpos, birdYpos + birdV, 40, 40, this);
     }
 
     public void checkBorderCollusion() {

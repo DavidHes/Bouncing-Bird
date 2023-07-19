@@ -14,8 +14,8 @@ public class MenuPanel extends MenuBasis {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        g.drawImage(titelBB, 44, -50, 350, 350, this);
-        g.drawImage(grünbird, 184, 10, 60, 60, this);
+        g.drawImage(menuTitle, 44, -50, 350, 350, this);
+        g.drawImage(bird, 184, 10, 60, 60, this);
 
         repaint();
     }
