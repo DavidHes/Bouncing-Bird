@@ -6,29 +6,29 @@ import javax.swing.JTextField;
 
 public class GamePanel extends MenuBasis {
     int score = 0;
-    int birdxPOS = 75, birdyPOS = 300;
+    int birdXpos = 75, birdYpos = 300;
     int birdV = 0, birdA = 8, birdI = 1; //birdA = Beschleunigung, birdV = Geschwidnigkeit
     final int tubeXValocity = 5, tubeWidth = 50;
     final int width = 700;
     int[] tube = {width, width + width / 2};
     int[] gap = {(int) (Math.random() * (frameHeight - 250)), (int) (Math.random() * (frameHeight - 250))};
 
-    private Font myFont1 = new Font("Serif", Font.BOLD, 28);
-    private Font myFont = new Font("Serif", Font.BOLD, 23);
-    private Font gameoverfont = new Font("Serif", Font.BOLD, 52);
+    private final Font scoreFont = new Font("Serif", Font.BOLD, 28);
+    private final Font clickToStartFont = new Font("Serif", Font.BOLD, 23);
+    private final Font gameOverFont = new Font("Serif", Font.BOLD, 52);
 
-    JButton restartBut, addscore;
-    static boolean spielmenuvisible = false;
+    JButton restartBut, addScore;
+    static boolean spielMenuVisible = false;
     static boolean gameOver = false;
 
     private boolean hasExecuted = false;
 
-    String gameovertext = "Game Over";
+    String gameOverText = "Game Over";
     String clickToStartText = "Click with mouse or press Enter to Start!", clearClickToStartText = "";
 
-    static String BackgroundColor;
+    static String backgroundColor;
 
-    JTextField scorename ;
+    JTextField scoreName ;
     private MouseListener mouseListener;
     private KeyListener keyListener;
 
@@ -43,33 +43,33 @@ public class GamePanel extends MenuBasis {
         restartBut = new JButton("Play Again");
         restartBut.setBounds(144, 250, 150, 50);
 
-        scorename = new JTextField("Name.....");
-        scorename.setBounds(144, 350, 150, 45);
-        scorename.setEditable(true);
-        scorename.setVisible(true);
-        scorename.addActionListener(actionListener);
-        add(scorename);
+        scoreName = new JTextField("Name.....");
+        scoreName.setBounds(144, 350, 150, 45);
+        scoreName.setEditable(true);
+        scoreName.setVisible(true);
+        scoreName.addActionListener(actionListener);
+        add(scoreName);
 
-        scorename.addFocusListener(new FocusAdapter() {
+        scoreName.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
-                if (scorename.getText().equals("Name.....")) {
-                    scorename.setText("");
-                    scorename.setForeground(Color.BLACK);
+                if (scoreName.getText().equals("Name.....")) {
+                    scoreName.setText("");
+                    scoreName.setForeground(Color.BLACK);
                 }
             }
             @Override
             public void focusLost(FocusEvent e) {
-                if (scorename.getText().isEmpty()) {
-                    scorename.setText("Name.....");
-                    scorename.setForeground(Color.GRAY);
+                if (scoreName.getText().isEmpty()) {
+                    scoreName.setText("Name.....");
+                    scoreName.setForeground(Color.GRAY);
                 }
             }
 
         });
-        addscore = new JButton("Add Score");
-        addscore.setBounds(144, 450, 150, 50);
+        addScore = new JButton("Add Score");
+        addScore.setBounds(144, 450, 150, 50);
 
         backToMenuBut.setBounds(144, 550, 150, 50);
         backToMenuBut.addActionListener(actionListener);
@@ -89,25 +89,25 @@ public class GamePanel extends MenuBasis {
 
         if (gameOver == false) {
             g.setColor(Color.BLACK);
-            g.setFont(myFont);
+            g.setFont(clickToStartFont);
             g.drawString(clickToStartText, 11, 400);
             spawnTube(g);
             drawbird(g);
-            scorename.setVisible(false);
+            scoreName.setVisible(false);
             g.setColor(Color.BLACK);
-            g.setFont(myFont1);
+            g.setFont(scoreFont);
             g.drawString("" + score, 205, 100);
 
             repaint();
 
         } else {
             g.setColor(Color.BLACK);
-            g.setFont(myFont1);
+            g.setFont(scoreFont);
             g.drawString(clickToStartText, 11, 400);
             spawnTube(g);
             drawbird(g);
             g.setColor(Color.BLACK);
-            g.setFont(myFont1);
+            g.setFont(scoreFont);
             g.drawString("" + score, 205, 100);
 
             repaint();
@@ -115,8 +115,8 @@ public class GamePanel extends MenuBasis {
 
         if(gameOver == true){
             g.setColor(Color.BLACK);
-            g.setFont(gameoverfont);
-            g.drawString(gameovertext, 88, 200);
+            g.setFont(gameOverFont);
+            g.drawString(gameOverText, 88, 200);
 
 
             repaint();
@@ -138,7 +138,7 @@ public class GamePanel extends MenuBasis {
             g.setColor(Color.RED);
             g.fillRect(tube[i], 0, tubeWidth, frameHeight);
 
-            switch (BackgroundColor) {
+            switch (backgroundColor) {
                 case "Hintergrund-Stadt-Mittag.png":
                     g.setColor(new Color(147, 225, 254));
                     break;
@@ -162,13 +162,13 @@ public class GamePanel extends MenuBasis {
         }
     }
 
-    public void gameoverbild() {
+    public void gameOverBild() {
         ActionListener actionListener;
 
         this.add(restartBut);
         this.add(backToMenuBut);
-        this.add(addscore);
-        scorename.setVisible(true);
+        this.add(addScore);
+        scoreName.setVisible(true);
 
         repaint();
         revalidate();
@@ -177,11 +177,11 @@ public class GamePanel extends MenuBasis {
 
     public void addTheScore() {
 
-        String name = scorename.getText();
+        String name = scoreName.getText();
         //vllt an der falschen Stelle
         //addscore(score,name);
-        scorename.setText("Name.....");
-        scorename.repaint();
+        scoreName.setText("Name.....");
+        scoreName.repaint();
 
     }
 
@@ -190,19 +190,19 @@ public class GamePanel extends MenuBasis {
 
         clickToStartText = "Click with mouse or press Enter to Start!";
         score = 0;
-        birdxPOS = 75 ; birdyPOS = 300;
+        birdXpos = 75 ; birdYpos = 300;
         birdV = 0; birdA = 8; birdI = 1;
         tube [0] = width;
         tube [1] = width + width/2;
         gap [0] = (int) (Math.random() * (frameHeight - 250));
         gap [1] = (int) (Math.random() * (frameHeight - 250));
         gameOver = false;
-        spielmenuvisible = false;
-        scorename.setText("Name.....");
+        spielMenuVisible = false;
+        scoreName.setText("Name.....");
 
         remove(backToMenuBut);
         remove(restartBut);
-        remove(addscore);
+        remove(addScore);
 
         setFocusable(true);
         requestFocusInWindow();
@@ -213,35 +213,35 @@ public class GamePanel extends MenuBasis {
 
     public void drawbird(Graphics g) {
 
-        g.drawImage(grünbird, birdxPOS, birdyPOS + birdV, 40, 40, this);
+        g.drawImage(grünbird, birdXpos, birdYpos + birdV, 40, 40, this);
     }
 
     public void checkBorderCollusion() {
-        System.out.println(birdyPOS + birdV);
+        System.out.println(birdYpos + birdV);
 
-        if (!(birdyPOS + birdV >= 0 && birdyPOS + birdV + 40 <= frameHeight)) {
-            System.out.println(birdyPOS + " + " + frameHeight);
+        if (!(birdYpos + birdV >= 0 && birdYpos + birdV + 40 <= frameHeight)) {
+            System.out.println(birdYpos + " + " + frameHeight);
             //   System.out.println("Border getroffen");
             gameOver = true;
-            spielmenuvisible = true;
-            gameoverbild();
+            spielMenuVisible = true;
+            gameOverBild();
         }
     }
 
-    public void changebirdcord() {
+    public void changeBirdCord() {
 
         birdA = -8;
         System.out.println("haa");
     }
 
-    public void dropbird() {
+    public void dropBird() {
         if (clickToStartText == clearClickToStartText && gameOver == false) {
             birdA += birdI;
             birdV += birdA;
         }
     }
 
-    public void movetube() {
+    public void moveTube() {
         if (clickToStartText == clearClickToStartText && gameOver == false) {
             tube[0] -= tubeXValocity;
             tube[1] -= tubeXValocity;
@@ -263,14 +263,14 @@ public class GamePanel extends MenuBasis {
             //if tube in front and on bird or is behind or on bird or bird is in the gap
             if (tube[i] <= 115 && tube[i] + tubeWidth >= 115 || tube[i] <= 75 && tube[i] + tubeWidth >= 75) {
                 // if bird is over gap
-                if ((birdyPOS + birdV) >= 0 && (birdyPOS + birdV) <= gap[i]
+                if ((birdYpos + birdV) >= 0 && (birdYpos + birdV) <= gap[i]
                         //or under gap
-                        || (birdyPOS + birdV + 40) >= gap[i] + 100 && (birdyPOS + birdV + 40) <= frameHeight) {
+                        || (birdYpos + birdV + 40) >= gap[i] + 100 && (birdYpos + birdV + 40) <= frameHeight) {
                     gameOver = true;
                     GameController.gameStarted = false;
-                    spielmenuvisible = true;
+                    spielMenuVisible = true;
                     System.out.println("Tube getroffen");
-                    gameoverbild();
+                    gameOverBild();
 
                 }
             }

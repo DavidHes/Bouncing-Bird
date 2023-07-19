@@ -61,7 +61,7 @@ public class MenuBasis extends JPanel implements Observer {
                 aktuellerBG = arg.toString();
                 System.out.println("test: " + aktuellerBG);
                 titelBwB = new ImageIcon(aktuellerBG).getImage();
-                GamePanel.BackgroundColor = aktuellerBG;
+                GamePanel.backgroundColor = aktuellerBG;
 
             } else if(arg instanceof ArrayList<?>) {
                 ScoreboardPanel.scoreLabel.setText(arg.toString());
