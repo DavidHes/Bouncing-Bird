@@ -15,9 +15,9 @@ public class MenuBasis extends JPanel implements Observer {
 
     GameController gameController;
 
-    static Image titelBB = new ImageIcon("BouncingBirdTitel.png").getImage();
-    static Image titelBwB;
-    static Image grünbird; //= new ImageIcon(aktuellesterPfad).getImage();
+    static Image menuTitle = new ImageIcon("BouncingBirdTitel.png").getImage();
+    static Image background;
+    static Image bird;
 
 
     public MenuBasis() {
@@ -56,18 +56,16 @@ public class MenuBasis extends JPanel implements Observer {
             if (arg.toString().charAt(0) == "VOGELSKIN".charAt(0)) {
                 aktuellerSkin = arg.toString();
                 System.out.println("test: " + aktuellerSkin);
-                grünbird = new ImageIcon(aktuellerSkin).getImage();
+                bird = new ImageIcon(aktuellerSkin).getImage();
             }else if (arg.toString().charAt(0) == "HINTERGRUND".charAt(0)) {
                 aktuellerBG = arg.toString();
                 System.out.println("test: " + aktuellerBG);
-                titelBwB = new ImageIcon(aktuellerBG).getImage();
+                background = new ImageIcon(aktuellerBG).getImage();
                 GamePanel.backgroundColor = aktuellerBG;
 
             } else if(arg instanceof ArrayList<?>) {
                 ScoreboardPanel.scoreLabel.setText(arg.toString());
             }
-        } else {
-            System.out.println("gehhhhhhht net");
         }
 
     }
@@ -78,7 +76,7 @@ public class MenuBasis extends JPanel implements Observer {
         // TODO Auto-generated method stub
         super.paintComponent(g);
 
-        g.drawImage(titelBwB, 0, 0, frameWidth, frameHeight, this);
+        g.drawImage(background, 0, 0, frameWidth, frameHeight, this);
         repaint();
 
     }

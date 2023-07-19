@@ -6,13 +6,6 @@ public class GameController implements ActionListener, MouseListener, KeyListene
 
     public static boolean gameStarted = false;
 
-
-
-    //überföüssig
-  /*  RateGamePanel rgp;
-    ScoreboardPanel sbp;
-    SettingsPanel settingspanel;
-    MenuPanel menuPanel;*/
     MenuBasis menuBasis;
     RateGameList rateGameList;
     ScoreboardList scoreboardList;

@@ -4,29 +4,6 @@ import java.util.ArrayList;
 public class BouncingBirdDBDAO implements BouncingBirdDAO{
 
     OracleDsSingleton ora = OracleDsSingleton.getInstance();
-  /*  private static OracleDataSource ds = null;
-    private String url = "jdbc:oracle:thin:@//10.50.205.21:1521/dbk.hwr-berlin.de";
-    private String password = "neuesPw";
-    private String user = "OOP2_SS23_G1_P1";
-*/
-
-    public BouncingBirdDBDAO() {
-     /*   try {
-            ds = new OracleDataSource();
-
-            ds.setDataSourceName("HWROracleDataSource");
-            ds.setURL(url);
-
-            ds.setUser(user);
-            ds.setPassword(password);
-
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }*/
-    }
-
-    ///////////////////CLOSE FEHLT NOCH!!!!!!!!!!!!!!!
 
     /**
      *
@@ -53,10 +30,7 @@ public class BouncingBirdDBDAO implements BouncingBirdDAO{
                     resultSet.close();
                     statement.close();
                     connection.close();
-                   // System.out.println("Folgender Hintergrund ist der aktuellste: " + name);
                     break; // Abbrechen, wenn der gewünschte Eintrag gefunden wurde
-                } else {
-                  //  System.out.println("Fehler");
                 }
             }
         } catch (SQLException e) {

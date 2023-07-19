@@ -12,8 +12,5 @@ public class GameTester {
         MenuPanel menuPanel = new MenuPanel(menuController);
 
 
-        // MenuFundament menuFundament = new MenuFundament();
-        //  menuFundament.addObservable();
-
     }
 }
