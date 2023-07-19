@@ -1,5 +1,11 @@
+import java.util.ArrayList;
+
 public interface BouncingBirdDAO {
 
-    public void setterMethode(String typ, String pfad);
-    public String getterMethode(String typ);
+    void setterMethode(String typ, String pfad);
+    String getterMethode(String typ);
+
+    ArrayList<String> getScoreboard();
+    void setScore(String name, int score);
+
 }

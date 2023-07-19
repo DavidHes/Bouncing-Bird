@@ -1,6 +1,5 @@
-import oracle.jdbc.pool.OracleDataSource;
-
 import java.sql.*;
+import java.util.ArrayList;
 
 public class BouncingBirdDBDAO implements BouncingBirdDAO{
 
@@ -87,6 +86,7 @@ public class BouncingBirdDBDAO implements BouncingBirdDAO{
         }
     }
 
+
     @Override
     public void setterMethode(String typ, String pfad) {
 
@@ -112,6 +112,97 @@ public class BouncingBirdDBDAO implements BouncingBirdDAO{
                 if (ora.getConnection() != null) {
                     ora.getConnection().close();
                   //  System.out.println("Die Connection wurde geschlossen");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+
+            }
+        }
+    }
+
+    @Override
+    public ArrayList<String> getScoreboard() {
+
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        String username = null;
+        String userscore = null;
+
+        ArrayList<String> scoreList = new ArrayList<>();
+
+        try {
+            Connection connection = ora.getConnection();
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT * FROM OOP2_SS23_G1_P1.SCOREBOARD ORDER BY TIMESTAMP DESC");
+
+            while (resultSet.next()) {
+                username = resultSet.getString("NAME");
+                userscore = resultSet.getString("HIGHSCORE");
+                scoreList.add(username);
+                scoreList.add(userscore);
+
+                break;
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ora.getConnection() != null) {
+                    ora.getConnection().close();
+                    //System.out.println("Die Connection wurde geschlossen");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                if(statement.getConnection() != null) {
+                    statement.close();
+                    //     System.out.println("Das Statement wurde geschlossen");
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                if(resultSet != null) {
+                    resultSet.close();
+                    //   System.out.println("Das ResultSet wurde geschlossen");
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            return scoreList;
+        }
+    }
+
+    @Override
+    public void setScore(String name, int score) {
+
+        PreparedStatement statement = null;
+
+        try (Connection connection = ora.getConnection()) {
+            String sql = "INSERT INTO SETTINGS (HIGHSCORE, NAME, TIMESTAMP) VALUES (?, ?, CURRENT_TIMESTAMP)";
+            statement = connection.prepareStatement(sql);
+            statement.setString(2, name);
+            statement.setInt(1, score);
+
+            int rowsUpdated = statement.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                //  System.out.println("Erfolgreich aktualisiert");
+
+
+            } else {
+                //     System.out.println("Fehler beim Aktualisieren");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ora.getConnection() != null) {
+                    ora.getConnection().close();
+                    //  System.out.println("Die Connection wurde geschlossen");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

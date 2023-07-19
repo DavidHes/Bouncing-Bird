@@ -2,6 +2,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -63,6 +64,9 @@ public class MenuFundament extends JPanel implements Observer {
                 System.out.println("test: " + aktuellerBG);
                 titelBwB = new ImageIcon(aktuellerBG).getImage();
                 GamePanel.BackgroundColor = aktuellerBG;
+
+            } else if(arg instanceof ArrayList<?>) {
+                ScoreboardPanel.scoreLabel.setText(arg.toString());
             }
         } else {
             System.out.println("gehhhhhhht net");
