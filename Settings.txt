@@ -1,0 +1,2 @@
+Skin: Vogel-Blau.png
+Background: Hintergrund-Stadt-Nacht.png
