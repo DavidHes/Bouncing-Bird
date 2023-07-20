@@ -1,79 +1,70 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 public class RateGamePanel extends MenuBasis {
-    private JButton submitButton;
-    private JTextArea reviewArea;
-    private JTextField usernameField;
-    private JTextField commentField;
-    private RateGameList rateGameList;
 
-    public RateGamePanel(ActionListener actionListener /*, RateGameList rateGameList*/) {
+    static RateGameList rateGameList = new RateGameList();
+    static JLabel reviewLabel;
+    static String reviews;
+
+
+    public RateGamePanel(ActionListener actionListener) {
         super();
-        this.rateGameList = rateGameList;
-        add(backToMenuBut);
 
+        setLayout(null);
+        reviewLabel = new JLabel();
+        reviewLabel.setBounds(10, 250, 2000, 50);
+        add(reviewLabel);
+
+        JButton writeReviewButton = new JButton("Click to rate");
+        writeReviewButton.setBounds(144, 550, 150, 50);
+        writeReviewButton.addActionListener(new ButtonClickListener());
+
+        add(writeReviewButton);
+
+        backToMenuBut.setBounds(144, 650, 150, 50);
+        add(backToMenuBut);
         backToMenuBut.addActionListener(actionListener);
 
-        //initComponents();
-     //   layoutComponents();
+        rateGameList.addObserver(this);
+        rateGameList.getRating();
     }
 
- /*   private void initComponents() {
-        usernameField = new JTextField(20);
-        add(new JLabel("Username:"));
-        add(usernameField);
+    private static class ButtonClickListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JTextField commentTextField = new JTextField(10);
+            JTextField userTextField = new JTextField(10);
+            JComboBox<Integer> ratingComboBox = new JComboBox<>(new Integer[]{1, 2, 3, 4, 5});
 
-        commentField = new JTextField(20);
-        add(new JLabel("Comment:"));
-        add(commentField);
+            JPanel panel = new JPanel();
+            panel.setLayout(new GridLayout(3, 2));
+            panel.add(new JLabel("Comment:"));
+            panel.add(commentTextField);
+            panel.add(new JLabel("User:"));
+            panel.add(userTextField);
+            panel.add(new JLabel("Rating:"));
+            panel.add(ratingComboBox);
 
-        submitButton = new JButton("Submit Review");
-        submitButton.addActionListener(new ReviewSubmissionListener());
-        add(submitButton);
+            int result = JOptionPane.showConfirmDialog(null, panel, "Write Review",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
-        reviewArea = new JTextArea(10, 30);
-        reviewArea.setEditable(false);
-        JScrollPane scrollPane = new JScrollPane(reviewArea);
-        add(scrollPane, BorderLayout.CENTER);
-    }
+            if (result == JOptionPane.OK_OPTION) {
+                String comment = commentTextField.getText();
+                String user = userTextField.getText();
+                int rating = (int) ratingComboBox.getSelectedItem();
 
-    public void displayRatings(ratings) { // List Ratings?
-        reviewArea.setText("");
-        for (Rating rating : ratings) {
-            reviewArea.append("Username: " + rating.getUsername() + "\n");
-            reviewArea.append("Rating: " + rating.getRating() + "\n");
-            reviewArea.append("Comment: " + rating.getComment() + "\n");
-            reviewArea.append("Timestamp: " + rating.getTimestamp() + "\n");
-            reviewArea.append("------------------------\n");
-        }
-    }
-
-    private class ReviewSubmissionListener implements ActionListener {
-        public void actionPerformed(ActionEvent event) {
-            String username = getUsername();
-            String comment = getComment();
-
-            if (username.isEmpty() || comment.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Username and comment cannot be empty!");
-                return;
+                if (!comment.isEmpty() && !user.isEmpty()) {
+                    rateGameList.addRating(user, comment, rating);
+                    rateGameList.getRating();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Bitte füllen Sie alle Felder aus.",
+                            "Fehler", JOptionPane.ERROR_MESSAGE);
+                }
             }
-
-            rateGameList.writeReviewFile(username, comment, 5); // Wir gehen von einem Standardrating von 5 aus
-
-            // Aktualisieren Sie die angezeigten Bewertungen
-            displayRatings(rateGameList.renderReview());
         }
     }
-
-    public String getUsername() {
-        return usernameField.getText();
-    }
-
-    public String getComment() {
-        return commentField.getText();
-    }*/
 }

@@ -8,4 +8,7 @@ public interface BouncingBirdDAO {
     ArrayList<String> getScoreboard();
     void setScore(String name, int score);
 
+    void addRating(String username, String comments, int rating);
+    String getRatings();
+
 }

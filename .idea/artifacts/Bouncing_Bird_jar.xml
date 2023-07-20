@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Bouncing Bird:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Bouncing_Bird_jar</output-path>
+    <root id="archive" name="Bouncing Bird.jar">
+      <element id="module-output" name="Bouncing Bird" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/ojdbc7.jar" path-in-jar="/" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/ojdbc7.jar" />
+    </root>
+  </artifact>
+</component>
